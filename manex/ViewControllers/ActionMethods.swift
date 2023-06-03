@@ -151,7 +151,7 @@ extension GameViewController {
         self.referenceShipSelectionMenu.alpha = 0.0
         self.view.endEditing(true)
         
-        let userInputs = commandMenu.formationView.getUserInputs()
+        let userInputs = getFormationViewUserInputs()
         let refShip = gameScene.warshipsArray[currentReferenceShip.tag] // tag is from 0-7
         gameScene.executeFormations(with: userInputs, withReferenceTo: refShip)
         
@@ -178,6 +178,10 @@ extension GameViewController {
                                        refShipIndex: currentReferenceShip.tag)
             }
         }
+    }
+    
+    func getFormationViewUserInputs() -> FormationInputs {
+        return commandMenu.formationView.getUserInputs()
     }
     
     @objc func executeCorpen() {
