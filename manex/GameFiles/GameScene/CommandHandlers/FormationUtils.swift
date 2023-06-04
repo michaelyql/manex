@@ -59,7 +59,7 @@ class FormationUtils {
          */
     }
     
-    func generatePositions(for trueBrg: CGFloat, warships: [Warship], refShip: Warship) -> [CGPoint] {
+    static func generatePositions(for trueBrg: CGFloat, warships: [Warship], refShip: Warship) -> [CGPoint] {
         var newPts: [CGPoint] = []
         let angleInRadians = trueBrg / 180 * .pi
         
@@ -83,7 +83,7 @@ class FormationUtils {
         return newPts
     }
     
-    func calculateTotalDistanceTravelledBetween(origin: [CGPoint], destination: [CGPoint]) -> CGFloat {
+    static func calculateTotalDistanceTravelledBetween(origin: [CGPoint], destination: [CGPoint]) -> CGFloat {
         guard origin.count == destination.count else { return -1 }
         
         var totalDist = CGFloat.zero
@@ -97,7 +97,7 @@ class FormationUtils {
         return totalDist
     }
     
-    func move(ships: [Warship], to newPos: [CGPoint], refShip: Warship) {
+    static func move(ships: [Warship], to newPos: [CGPoint], refShip: Warship) {
         guard newPos.count == ships.count else { return }
         
         let prevHeading = refShip.zRotation
@@ -117,10 +117,39 @@ class FormationUtils {
         }
     }
     
-    func findShipsAhead() {
+    static func findShips(relBrg: CGFloat, warships: [Warship], refShip: Warship) -> [Warship] {
+        let refLine = SKSpriteNode(texture: SKTexture(imageNamed: "referenceLine"))
+        refShip.addChild(refLine)
+        refLine.anchorPoint = CGPoint(x: 0.5, y: 0)
+        refLine.zRotation -= relBrg / 180 * .pi
         
+        var intersections: [Warship] = []
+        for ship in warships {
+            if ship == refShip {
+                continue
+            }
+            if refLine.intersects(ship) {
+                intersections.append(ship)
+            }
+        }
+        refLine.removeFromParent()
+        return intersections
     }
     
-    // findShipsAstern(), findShipsPortBeam(), findShipsStbdBeam() etc.
+    static func findShipsAhead(warships: [Warship], refShip: Warship) -> [Warship] {
+        return findShips(relBrg: 0, warships: warships, refShip: refShip)
+    }
+    
+    static func findShipsAstern(warships: [Warship], refShip: Warship) -> [Warship] {
+        return findShips(relBrg: 180, warships: warships, refShip: refShip)
+    }
+    
+    static func findShipsPortBeam(warships: [Warship], refShip: Warship) -> [Warship] {
+        return findShips(relBrg: -90, warships: warships, refShip: refShip)
+    }
+    
+    static func findShipsStbdBeam(warships: [Warship], refShip: Warship) -> [Warship] {
+        return findShips(relBrg: 90, warships: warships, refShip: refShip)
+    }
     
 }

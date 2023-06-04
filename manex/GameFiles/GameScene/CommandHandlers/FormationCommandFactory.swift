@@ -21,17 +21,17 @@ class FormationCommandFactory {
     static let SUBDIV_LEVEL = 1
     static let UNSELECTED = -1
     
-    static func getCommandHandler(for inputs: FormationInputs, refShip: Warship, warshipsArray: [Warship]) throws -> FormationCommandHandler {
+    static func getCommandHandler(for inputs: FormationInputs, refShip: Warship, warships: [Warship]) throws -> FormationCommandHandler {
         
         if !inputs.isGolfSwitchOn {
             if inputs.divSeparation == UNSELECTED {
                 if let trueBrg = inputs.trueBrg {
-                    return FormationTrueBearingCommandHandler(trueBrg: trueBrg, refShip: refShip, warshipsArray: warshipsArray)
+                    return FormationTrueBearingCommandHandler(trueBrg: trueBrg, refShip: refShip, warships: warships)
                 }
                 else if let relBrg = inputs.relBrg {
                     // just reuse the formation true bearing functionality
                     let trueBrg = try convertRelToTrueBrg(relDir: inputs.relDir, relBrg: relBrg, refShip: refShip)
-                    return FormationTrueBearingCommandHandler(trueBrg: trueBrg, refShip: refShip, warshipsArray: warshipsArray)
+                    return FormationTrueBearingCommandHandler(trueBrg: trueBrg, refShip: refShip, warships: warships)
                 }
                 else {
                     throw FormationInputError.noBearingIndicated
