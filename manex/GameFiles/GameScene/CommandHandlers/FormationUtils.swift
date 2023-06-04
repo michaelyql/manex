@@ -59,7 +59,7 @@ class FormationUtils {
          */
     }
     
-    static func generatePositions(for trueBrg: CGFloat, warships: [Warship], refShip: Warship) -> [CGPoint] {
+    static func generatePositionsToCompare(for trueBrg: CGFloat, warships: [Warship], refShip: Warship) -> [CGPoint] {
         var newPts: [CGPoint] = []
         let angleInRadians = trueBrg / 180 * .pi
         
@@ -83,6 +83,26 @@ class FormationUtils {
         return newPts
     }
     
+    static func generatePositions(warships: [Warship], trueBrg: CGFloat, refShip: Warship) -> [CGPoint] {
+        var newPts: [CGPoint] = []
+        let angleInRadians = trueBrg / 180 * .pi
+        
+        for ship in warships {
+            let newX: CGFloat
+            let newY: CGFloat
+            if ship.sequenceNum < refShip.sequenceNum {
+                newX = refShip.position.x + 150 * sin(angleInRadians) * CGFloat(refShip.sequenceNum-ship.sequenceNum)
+                newY = refShip.position.y + 150 * cos(angleInRadians) * CGFloat(refShip.sequenceNum-ship.sequenceNum)
+            }
+            else {
+                newX = refShip.position.x - 150 * sin(angleInRadians) * CGFloat(ship.sequenceNum-refShip.sequenceNum)
+                newY = refShip.position.y - 150 * cos(angleInRadians) * CGFloat(ship.sequenceNum-refShip.sequenceNum)
+            }
+            newPts.append(CGPoint(x: newX, y: newY))
+        }
+        return newPts
+    }
+    
     static func calculateTotalDistanceTravelledBetween(origin: [CGPoint], destination: [CGPoint]) -> CGFloat {
         guard origin.count == destination.count else { return -1 }
         
@@ -97,15 +117,15 @@ class FormationUtils {
         return totalDist
     }
     
-    static func move(ships: [Warship], to newPos: [CGPoint], refShip: Warship) {
-        guard newPos.count == ships.count else { return }
+    static func move(warships: [Warship], to newPos: [CGPoint], refShip: Warship) {
+        guard newPos.count == warships.count else { return }
         
         let prevHeading = refShip.zRotation
         for i in 0..<newPos.count {
-            if ships[i] == refShip {
+            if warships[i] == refShip {
                 continue
             }
-            let currShip = ships[i]
+            let currShip = warships[i]
             let path = UIBezierPath()
             path.move(to: currShip.position)
             path.addLine(to: newPos[i])
@@ -150,6 +170,19 @@ class FormationUtils {
     
     static func findShipsStbdBeam(warships: [Warship], refShip: Warship) -> [Warship] {
         return findShips(relBrg: 90, warships: warships, refShip: refShip)
+    }
+    
+    // TODO: - Implement these functions below 
+    static func haulOutToPort() {
+        
+    }
+    
+    static func haulOutToStbd() {
+        
+    }
+    
+    static func haulOutastern() {
+        
     }
     
 }
