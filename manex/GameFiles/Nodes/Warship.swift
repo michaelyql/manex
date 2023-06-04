@@ -67,7 +67,7 @@ class Warship: SKSpriteNode {
     }
     
     func getTrueHeading() -> CGFloat {
-        return -self.zRotation / .pi * 180
+        return round(-self.zRotation / .pi * 180)
     }
 }
 
