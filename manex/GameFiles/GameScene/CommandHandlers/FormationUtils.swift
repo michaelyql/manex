@@ -170,44 +170,48 @@ class FormationUtils {
     }
     
     static func haulOutToPort(warships: [Warship], refShip: Warship) {
-        let sumOfStandardDistance = CGFloat(150 * (warships.count - 1))
-        let destinationPointDistance = CGFloat(sumOfStandardDistance * 2 + 150)
         let offset = -refShip.zRotation
         
         // If Ship 1 is at the end of the formation, ship 1 hauls out first
         if warships[0] == refShip {
-            var i = CGFloat(warships.count - 1)
+            var i = CGFloat.zero
             for ship in warships {
                 let controlPointBrg = offset - .pi/2
                 let controlPoint = CGPoint(x: ship.position.x + 150 * sin(controlPointBrg),
                                            y: ship.position.y + 150 * cos(controlPointBrg))
-                let destinationPoint = CGPoint(x: controlPoint.x + (i * 150 * 2 + 150) * sin(offset),
-                                               y: controlPoint.y + (i * 150 * 2 + 150) * cos(offset))
-                i -= 1
+                let destX = controlPoint.x + (i * CGFloat(300) + CGFloat(150)) * sin(offset)
+                let destY = controlPoint.y + (i * CGFloat(300) + CGFloat(150)) * cos(offset)
+                let destinationPoint = CGPoint(x: destX, y: destY)
+                i += 1
                 let pathToDest = UIBezierPath()
                 pathToDest.move(to: ship.position)
                 pathToDest.addCurve(to: destinationPoint, controlPoint1: controlPoint, controlPoint2: controlPoint)
-                let moveAction = SKAction.follow(pathToDest.cgPath, asOffset: false, orientToPath: true, speed: 100)
-                ship.run(SKAction.wait(forDuration: TimeInterval(ship.sequenceNum-1)))
-                ship.run(moveAction)
+                let moveAction = SKAction.follow(pathToDest.cgPath, asOffset: false, orientToPath: true, speed: 120)
+                let waitAction = SKAction.wait(forDuration: TimeInterval(CGFloat(Warship.numberOfShips)-i) * 2.4)
+                ship.run(waitAction, completion: {
+                    ship.run(moveAction)
+                })
             }
         }
         // Else if the last ship (by sequence number) is at the end of the formation, it hauls out first
         else if warships[Warship.numberOfShips-1] == refShip {
-            var i = CGFloat(warships.count - 1)
+            var i = CGFloat.zero
             for ship in warships.reversed() {
                 let controlPointBrg = offset - .pi/2
                 let controlPoint = CGPoint(x: ship.position.x + 150 * sin(controlPointBrg),
                                            y: ship.position.y + 150 * cos(controlPointBrg))
-                let destinationPoint = CGPoint(x: controlPoint.x + (i * 150 * 2 + 150) * sin(offset),
-                                               y: controlPoint.y + (i * 150 * 2 + 150) * cos(offset))
-                i -= 1
+                let destX = controlPoint.x + (i * CGFloat(300) + CGFloat(150)) * sin(offset)
+                let destY = controlPoint.y + (i * CGFloat(300) + CGFloat(150)) * cos(offset)
+                let destinationPoint = CGPoint(x: destX, y: destY)
+                i += 1
                 let pathToDest = UIBezierPath()
                 pathToDest.move(to: ship.position)
                 pathToDest.addCurve(to: destinationPoint, controlPoint1: controlPoint, controlPoint2: controlPoint)
-                let moveAction = SKAction.follow(pathToDest.cgPath, asOffset: false, orientToPath: true, speed: 100)
-                ship.run(SKAction.wait(forDuration: TimeInterval(ship.sequenceNum-1)))
-                ship.run(moveAction)
+                let moveAction = SKAction.follow(pathToDest.cgPath, asOffset: false, orientToPath: true, speed: 120)
+                let waitAction = SKAction.wait(forDuration: TimeInterval(CGFloat(Warship.numberOfShips)-i) * 2.4)
+                ship.run(waitAction, completion: {
+                    ship.run(moveAction)
+                })
             }
         }
         else {

@@ -61,17 +61,27 @@ class FormationTrueBearingCommandHandler: FormationCommandHandler {
                 FormationUtils.move(warships: shipsToMove, to: newPos, refShip: refShip)
             }
             else if !shipsAhead.isEmpty {
-                if currentFormation == .one || currentFormation == .two && trueBrg == refShip.getAsternBearing() {
-                    FormationUtils.haulOutToPort(warships: warships, refShip: refShip)
+                if currentFormation == .one && trueBrg == refShip.getAsternBearing() {
+                    FormationUtils.haulOutToPort(warships: warships, refShip: warships[0])
+                }
+                else if currentFormation == .two && trueBrg == refShip.getAsternBearing() {
+                    FormationUtils.haulOutToPort(warships: warships, refShip: warships[Warship.numberOfShips-1])
                 }
                 else {
+                    // unintended behaviour
+                    // ships in form 2, command given is Form 000, ref ship 1
+                    // all ships after ship 1 formed on reciprocal bearing
+                    // need to make a check first whether ships are already in position and don't need to move
                     let newPos = FormationUtils.generatePositions(warships: shipsAhead, trueBrg: trueBrg, refShip: refShip)
                     FormationUtils.move(warships: shipsAhead, to: newPos, refShip: refShip)
                 }
             }
             else if !shipsAstern.isEmpty {
-                if currentFormation == .one || currentFormation == .two && trueBrg == refShip.getAsternBearing() {
-                    FormationUtils.haulOutToPort(warships: warships, refShip: refShip)
+                if currentFormation == .one && trueBrg == refShip.getTrueHeading() {
+                    FormationUtils.haulOutToPort(warships: warships, refShip: warships[0])
+                }
+                else if currentFormation == .two && trueBrg == refShip.getTrueHeading() {
+                    FormationUtils.haulOutToPort(warships: warships, refShip: warships[Warship.numberOfShips-1])
                 }
                 else {
                     let newPos = FormationUtils.generatePositions(warships: shipsAstern, trueBrg: trueBrg, refShip: refShip)
