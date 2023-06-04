@@ -5,8 +5,8 @@
 //  Created by michaelyangqianlong on 3/6/23.
 //
 
-import Foundation
 import SpriteKit
+import UIKit
 
 // TODO: - Port all of the signal execution utility functions over to this class 
 
@@ -59,16 +59,62 @@ class FormationUtils {
          */
     }
     
-    func generatePositions() {
+    func generatePositions(for trueBrg: CGFloat, warships: [Warship], refShip: Warship) -> [CGPoint] {
+        var newPts: [CGPoint] = []
+        let angleInRadians = trueBrg / 180 * .pi
         
+        for ship in warships {
+            let newX: CGFloat
+            let newY: CGFloat
+            
+            // new points on bearing indicated
+            if ship.sequenceNum < refShip.sequenceNum {
+                newX = refShip.position.x + 150 * sin(angleInRadians) * CGFloat(refShip.sequenceNum - ship.sequenceNum)
+                newY = refShip.position.y + 150 * cos(angleInRadians) * CGFloat(refShip.sequenceNum - ship.sequenceNum)
+            }
+            
+            // new points on reciprocal bearing
+            else {
+                newX = refShip.position.x - 150 * sin(angleInRadians) * CGFloat(refShip.sequenceNum - ship.sequenceNum)
+                newY = refShip.position.y - 150 * cos(angleInRadians) * CGFloat(refShip.sequenceNum - ship.sequenceNum)
+            }
+            newPts.append(CGPoint(x: newX, y: newY))
+        }
+        return newPts
     }
     
-    func calculateDistanceBetween() {
+    func calculateTotalDistanceTravelledBetween(origin: [CGPoint], destination: [CGPoint]) -> CGFloat {
+        guard origin.count == destination.count else { return -1 }
         
+        var totalDist = CGFloat.zero
+        for i in 0..<origin.count {
+            let originPt = origin[i]
+            let destPt = destination[i]
+            // distTravelled = sqrt(deltaX^2 + deltaY^2)
+            let distTravelled = (pow((originPt.x - destPt.x), 2) + pow((originPt.y - destPt.y), 2)).squareRoot()
+            totalDist += distTravelled
+        }
+        return totalDist
     }
     
-    func moveShipsTo() {
+    func move(ships: [Warship], to newPos: [CGPoint], refShip: Warship) {
+        guard newPos.count == ships.count else { return }
         
+        let prevHeading = refShip.zRotation
+        for i in 0..<newPos.count {
+            if ships[i] == refShip {
+                continue
+            }
+            let currShip = ships[i]
+            let path = UIBezierPath()
+            path.move(to: currShip.position)
+            path.addLine(to: newPos[i])
+            
+            let moveAction = SKAction.follow(path.cgPath, asOffset: false, orientToPath: true, speed: 100)
+            currShip.run(moveAction, completion: {
+                currShip.zRotation = prevHeading
+            })
+        }
     }
     
     func findShipsAhead() {
