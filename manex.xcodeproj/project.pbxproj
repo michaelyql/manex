@@ -31,7 +31,7 @@
 		11D76E912A22F55200E75455 /* ActionMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D76E902A22F55100E75455 /* ActionMethods.swift */; };
 		11D76E932A22F57800E75455 /* ToolbarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D76E922A22F57800E75455 /* ToolbarButton.swift */; };
 		11D76E952A22F58300E75455 /* CoreFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D76E942A22F58300E75455 /* CoreFunctions.swift */; };
-		11D76E972A22F58F00E75455 /* SignalExcecution.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D76E962A22F58F00E75455 /* SignalExcecution.swift */; };
+		11D76E972A22F58F00E75455 /* SignalExecution.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D76E962A22F58F00E75455 /* SignalExecution.swift */; };
 		11D76E992A22F5AB00E75455 /* SignalExecutionHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D76E982A22F5AB00E75455 /* SignalExecutionHelpers.swift */; };
 		11D76E9B2A22F5DF00E75455 /* Delegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D76E9A2A22F5DF00E75455 /* Delegates.swift */; };
 		11D76E9F2A22F5F100E75455 /* MenuButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D76E9E2A22F5F100E75455 /* MenuButtons.swift */; };
@@ -76,7 +76,7 @@
 		11D76E902A22F55100E75455 /* ActionMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionMethods.swift; sourceTree = "<group>"; };
 		11D76E922A22F57800E75455 /* ToolbarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarButton.swift; sourceTree = "<group>"; };
 		11D76E942A22F58300E75455 /* CoreFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreFunctions.swift; sourceTree = "<group>"; };
-		11D76E962A22F58F00E75455 /* SignalExcecution.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignalExcecution.swift; sourceTree = "<group>"; };
+		11D76E962A22F58F00E75455 /* SignalExecution.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignalExecution.swift; sourceTree = "<group>"; };
 		11D76E982A22F5AB00E75455 /* SignalExecutionHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignalExecutionHelpers.swift; sourceTree = "<group>"; };
 		11D76E9A2A22F5DF00E75455 /* Delegates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Delegates.swift; sourceTree = "<group>"; };
 		11D76E9E2A22F5F100E75455 /* MenuButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuButtons.swift; sourceTree = "<group>"; };
@@ -225,7 +225,7 @@
 		11D76EC62A23BBFC00E75455 /* SignalExecution */ = {
 			isa = PBXGroup;
 			children = (
-				11D76E962A22F58F00E75455 /* SignalExcecution.swift */,
+				11D76E962A22F58F00E75455 /* SignalExecution.swift */,
 				11D76E982A22F5AB00E75455 /* SignalExecutionHelpers.swift */,
 				11AB0C8C2A287C03006F8627 /* FindShips.swift */,
 				11965BBA2A2A077E00ABE0F9 /* MoveShips.swift */,
@@ -310,7 +310,7 @@
 				11AB0C8D2A287C03006F8627 /* FindShips.swift in Sources */,
 				11965BC72A2A536D00ABE0F9 /* FormationGolfTrueBearingCommandHandler.swift in Sources */,
 				11D76E8D2A22F51E00E75455 /* GameScene.swift in Sources */,
-				11D76E972A22F58F00E75455 /* SignalExcecution.swift in Sources */,
+				11D76E972A22F58F00E75455 /* SignalExecution.swift in Sources */,
 				11D76EBF2A231BD500E75455 /* CommandMenu.swift in Sources */,
 				11D76E602A22E8E800E75455 /* AppDelegate.swift in Sources */,
 				11D76E932A22F57800E75455 /* ToolbarButton.swift in Sources */,

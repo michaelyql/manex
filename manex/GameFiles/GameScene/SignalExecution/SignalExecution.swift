@@ -13,9 +13,9 @@ extension GameScene {
     func executeFormations(with formationInputs: FormationInputs, withReferenceTo refShip: Warship) {
         do {
             let coords = convertShipCoordsToPolarPoints()
-            let currentFormation = formationCalculator.calculateCurrentFormation(for: coords)
+            let currentFormation = GameScene.formationCalculator.calculateCurrentFormation(for: coords)
             
-            let handler = try FormationCommandFactory.getCommandHandler(for: formationInputs, refShip: refShip, warshipsArray: warshipsArray)
+            let handler = try FormationCommandFactory.getCommandHandler(for: formationInputs, refShip: refShip, warships: warshipsArray)
             handler.execute()
         }
         catch {
@@ -98,7 +98,7 @@ extension GameScene {
         let refShipIdx = refShip.sequenceNum-1
         
         let coords = convertShipCoordsToPolarPoints()
-        let currentFormation = formationCalculator.calculateCurrentFormation(for: coords)
+        let currentFormation = GameScene.formationCalculator.calculateCurrentFormation(for: coords)
         
         if currentFormation != .one && currentFormation != .two && currentFormation != .three && currentFormation != .four {
             let currentPts: [CGPoint] = getCurrentShipsPosition()
@@ -201,7 +201,7 @@ extension GameScene {
         if let newBrg = newBrg {
             self.formationBearing = newBrg
         }
-        let newFormation = formationCalculator.calculateCurrentFormation(for: convertShipCoordsToPolarPoints())
+        let newFormation = GameScene.formationCalculator.calculateCurrentFormation(for: convertShipCoordsToPolarPoints())
         self.currentFormation = newFormation
     }
 }
