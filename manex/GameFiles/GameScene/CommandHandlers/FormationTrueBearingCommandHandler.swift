@@ -57,17 +57,26 @@ class FormationTrueBearingCommandHandler: FormationCommandHandler {
             if !shipsAhead.isEmpty && !shipsAstern.isEmpty {
                 let shipsToMove = shipsAhead + shipsAstern
                 // ships ahead to form on bearing indicated. ships astern to form on reciprocal bearing
-                let newPos = FormationUtils.generatePositions(warships: warships, trueBrg: trueBrg, refShip: refShip)
-                FormationUtils.move(warships: warships, to: newPos, refShip: refShip)
+                let newPos = FormationUtils.generatePositions(warships: shipsToMove, trueBrg: trueBrg, refShip: refShip)
+                FormationUtils.move(warships: shipsToMove, to: newPos, refShip: refShip)
             }
             else if !shipsAhead.isEmpty {
-                // if currentFormation == .two && (trueBrg == refShip.getAsternBearing())
-                // haulOutToPort() or haulOutToStbd()
-                // if user has not selected port/stbd for rel dir, throw an exception
-                // then prompt user to pick which side for ships to haul out to
+                if currentFormation == .one || currentFormation == .two && trueBrg == refShip.getAsternBearing() {
+                    FormationUtils.haulOutToPort(warships: warships, refShip: refShip)
+                }
+                else {
+                    let newPos = FormationUtils.generatePositions(warships: shipsAhead, trueBrg: trueBrg, refShip: refShip)
+                    FormationUtils.move(warships: shipsAhead, to: newPos, refShip: refShip)
+                }
             }
             else if !shipsAstern.isEmpty {
-                
+                if currentFormation == .one || currentFormation == .two && trueBrg == refShip.getAsternBearing() {
+                    FormationUtils.haulOutToPort(warships: warships, refShip: refShip)
+                }
+                else {
+                    let newPos = FormationUtils.generatePositions(warships: shipsAstern, trueBrg: trueBrg, refShip: refShip)
+                    FormationUtils.move(warships: shipsAstern, to: newPos, refShip: refShip)
+                }
             }
             else if !shipsPortBeam.isEmpty && !shipsStbdBeam.isEmpty {
                 // implement haulOutAstern() - very similar to search turn

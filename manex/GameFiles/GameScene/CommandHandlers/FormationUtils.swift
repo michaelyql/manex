@@ -75,8 +75,8 @@ class FormationUtils {
             
             // new points on reciprocal bearing
             else {
-                newX = refShip.position.x - 150 * sin(angleInRadians) * CGFloat(refShip.sequenceNum - ship.sequenceNum)
-                newY = refShip.position.y - 150 * cos(angleInRadians) * CGFloat(refShip.sequenceNum - ship.sequenceNum)
+                newX = refShip.position.x - 150 * sin(angleInRadians) * CGFloat(ship.sequenceNum - refShip.sequenceNum)
+                newY = refShip.position.y - 150 * cos(angleInRadians) * CGFloat(ship.sequenceNum - refShip.sequenceNum)
             }
             newPts.append(CGPoint(x: newX, y: newY))
         }
@@ -122,9 +122,6 @@ class FormationUtils {
         
         let prevHeading = refShip.zRotation
         for i in 0..<newPos.count {
-            if warships[i] == refShip {
-                continue
-            }
             let currShip = warships[i]
             let path = UIBezierPath()
             path.move(to: currShip.position)
@@ -172,14 +169,53 @@ class FormationUtils {
         return findShips(relBrg: 90, warships: warships, refShip: refShip)
     }
     
-    // TODO: - Implement these functions below 
-    static func haulOutToPort() {
+    static func haulOutToPort(warships: [Warship], refShip: Warship) {
+        let sumOfStandardDistance = CGFloat(150 * (warships.count - 1))
+        let destinationPointDistance = CGFloat(sumOfStandardDistance * 2 + 150)
+        let offset = -refShip.zRotation
         
+        // If Ship 1 is at the end of the formation, ship 1 hauls out first
+        if warships[0] == refShip {
+            var i = CGFloat(warships.count - 1)
+            for ship in warships {
+                let controlPointBrg = offset - .pi/2
+                let controlPoint = CGPoint(x: ship.position.x + 150 * sin(controlPointBrg),
+                                           y: ship.position.y + 150 * cos(controlPointBrg))
+                let destinationPoint = CGPoint(x: controlPoint.x + (i * 150 * 2 + 150) * sin(offset),
+                                               y: controlPoint.y + (i * 150 * 2 + 150) * cos(offset))
+                i -= 1
+                let pathToDest = UIBezierPath()
+                pathToDest.move(to: ship.position)
+                pathToDest.addCurve(to: destinationPoint, controlPoint1: controlPoint, controlPoint2: controlPoint)
+                let moveAction = SKAction.follow(pathToDest.cgPath, asOffset: false, orientToPath: true, speed: 100)
+                ship.run(SKAction.wait(forDuration: TimeInterval(ship.sequenceNum-1)))
+                ship.run(moveAction)
+            }
+        }
+        // Else if the last ship (by sequence number) is at the end of the formation, it hauls out first
+        else if warships[Warship.numberOfShips-1] == refShip {
+            var i = CGFloat(warships.count - 1)
+            for ship in warships.reversed() {
+                let controlPointBrg = offset - .pi/2
+                let controlPoint = CGPoint(x: ship.position.x + 150 * sin(controlPointBrg),
+                                           y: ship.position.y + 150 * cos(controlPointBrg))
+                let destinationPoint = CGPoint(x: controlPoint.x + (i * 150 * 2 + 150) * sin(offset),
+                                               y: controlPoint.y + (i * 150 * 2 + 150) * cos(offset))
+                i -= 1
+                let pathToDest = UIBezierPath()
+                pathToDest.move(to: ship.position)
+                pathToDest.addCurve(to: destinationPoint, controlPoint1: controlPoint, controlPoint2: controlPoint)
+                let moveAction = SKAction.follow(pathToDest.cgPath, asOffset: false, orientToPath: true, speed: 100)
+                ship.run(SKAction.wait(forDuration: TimeInterval(ship.sequenceNum-1)))
+                ship.run(moveAction)
+            }
+        }
+        else {
+            print("Error")
+        }
     }
-    
-    static func haulOutToStbd() {
-        
-    }
+    // haulOutToStbd() is not implemented. The rationale behind this is that the user does not need
+    // to control whether the ships haul out to port or stbd since the resultant formation is the same.
     
     static func haulOutastern() {
         
