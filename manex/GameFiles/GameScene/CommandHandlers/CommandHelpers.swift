@@ -83,7 +83,7 @@ class CommandHelpers {
         return newPts
     }
     
-    static func generatePositions(warships: [Warship], trueBrg: CGFloat, refShip: Warship) -> [CGPoint] {
+    static func generatePositionsForTrueAndReciprocal(warships: [Warship], trueBrg: CGFloat, refShip: Warship) -> [CGPoint] {
         var newPts: [CGPoint] = []
         let angleInRadians = trueBrg / 180 * .pi
         
@@ -98,6 +98,19 @@ class CommandHelpers {
                 newX = refShip.position.x - 150 * sin(angleInRadians) * CGFloat(ship.sequenceNum-refShip.sequenceNum)
                 newY = refShip.position.y - 150 * cos(angleInRadians) * CGFloat(ship.sequenceNum-refShip.sequenceNum)
             }
+            newPts.append(CGPoint(x: newX, y: newY))
+        }
+        return newPts
+    }
+    
+    static func generatePositionsForTrueOnly(warships: [Warship], trueBrg: CGFloat, refShip: Warship) -> [CGPoint] {
+        var newPts: [CGPoint] = []
+        let angleInRadians = trueBrg / 180 * .pi
+        
+        for ship in warships {
+            let multiplier = abs(refShip.sequenceNum-ship.sequenceNum)
+            let newX = refShip.position.x + 150 * sin(angleInRadians) * CGFloat(multiplier)
+            let newY = refShip.position.y + 150 * cos(angleInRadians) * CGFloat(multiplier)
             newPts.append(CGPoint(x: newX, y: newY))
         }
         return newPts

@@ -57,8 +57,11 @@ class FormationTrueBearingCommandHandler: FormationCommandHandler {
             if !shipsAhead.isEmpty && !shipsAstern.isEmpty {
                 let shipsToMove = shipsAhead + shipsAstern
                 // ships ahead to form on bearing indicated. ships astern to form on reciprocal bearing
-                let newPos = CommandHelpers.generatePositions(warships: shipsToMove, trueBrg: trueBrg, refShip: refShip)
+                let newPos = CommandHelpers.generatePositionsForTrueAndReciprocal(warships: shipsToMove, trueBrg: trueBrg, refShip: refShip)
                 CommandHelpers.move(warships: shipsToMove, to: newPos, refShip: refShip)
+                
+                // only if there are ships both ahead and astern, then ships ahead will form on
+                // bearing indicated while ships astern form on reciprocal bearing
             }
             else if !shipsAhead.isEmpty {
                 if currentFormation == .one && trueBrg == refShip.getAsternBearing() {
@@ -68,11 +71,10 @@ class FormationTrueBearingCommandHandler: FormationCommandHandler {
                     CommandHelpers.haulOutToPort(warships: warships, refShip: warships[Warship.numberOfShips-1])
                 }
                 else {
-                    // unintended behaviour
-                    // ships in form 2, command given is Form 000, ref ship 1
-                    // all ships after ship 1 formed on reciprocal bearing
-                    // need to make a check first whether ships are already in position and don't need to move
-                    let newPos = CommandHelpers.generatePositions(warships: shipsAhead, trueBrg: trueBrg, refShip: refShip)
+                    // if there is only ships ahead or ships astern, then all ships will form on the
+                    // true bearing indicated.
+                    // if bearing change is greater than 135º, ship at the end will haul out first 
+                    let newPos = CommandHelpers.generatePositionsForTrueOnly(warships: shipsAhead, trueBrg: trueBrg, refShip: refShip)
                     CommandHelpers.move(warships: shipsAhead, to: newPos, refShip: refShip)
                 }
             }
@@ -84,7 +86,7 @@ class FormationTrueBearingCommandHandler: FormationCommandHandler {
                     CommandHelpers.haulOutToPort(warships: warships, refShip: warships[Warship.numberOfShips-1])
                 }
                 else {
-                    let newPos = CommandHelpers.generatePositions(warships: shipsAstern, trueBrg: trueBrg, refShip: refShip)
+                    let newPos = CommandHelpers.generatePositionsForTrueOnly(warships: shipsAstern, trueBrg: trueBrg, refShip: refShip)
                     CommandHelpers.move(warships: shipsAstern, to: newPos, refShip: refShip)
                 }
             }
