@@ -10,7 +10,7 @@ import UIKit
 
 // TODO: - Port all of the signal execution utility functions over to this class 
 
-class FormationUtils {
+class CommandHelpers {
     
     static func getCurrentShipsPosition(warships: [Warship]) -> [CGPoint] {
         var pts: [CGPoint] = []

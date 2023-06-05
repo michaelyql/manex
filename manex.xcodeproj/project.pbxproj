@@ -14,7 +14,7 @@
 		11965BC52A2A530F00ABE0F9 /* FormationTrueBearingCommandHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11965BC42A2A530F00ABE0F9 /* FormationTrueBearingCommandHandler.swift */; };
 		11965BC72A2A536D00ABE0F9 /* FormationGolfTrueBearingCommandHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11965BC62A2A536D00ABE0F9 /* FormationGolfTrueBearingCommandHandler.swift */; };
 		11965BC92A2A538E00ABE0F9 /* FormationTrueBearingWithDivHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11965BC82A2A538E00ABE0F9 /* FormationTrueBearingWithDivHandler.swift */; };
-		11965BCB2A2A574500ABE0F9 /* FormationUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11965BCA2A2A574500ABE0F9 /* FormationUtils.swift */; };
+		11965BCB2A2A574500ABE0F9 /* CommandHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11965BCA2A2A574500ABE0F9 /* CommandHelpers.swift */; };
 		11AB0C8D2A287C03006F8627 /* FindShips.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11AB0C8C2A287C03006F8627 /* FindShips.swift */; };
 		11D76E602A22E8E800E75455 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D76E5F2A22E8E800E75455 /* AppDelegate.swift */; };
 		11D76E6B2A22E8E800E75455 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11D76E692A22E8E800E75455 /* Main.storyboard */; };
@@ -58,7 +58,7 @@
 		11965BC42A2A530F00ABE0F9 /* FormationTrueBearingCommandHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormationTrueBearingCommandHandler.swift; sourceTree = "<group>"; };
 		11965BC62A2A536D00ABE0F9 /* FormationGolfTrueBearingCommandHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormationGolfTrueBearingCommandHandler.swift; sourceTree = "<group>"; };
 		11965BC82A2A538E00ABE0F9 /* FormationTrueBearingWithDivHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormationTrueBearingWithDivHandler.swift; sourceTree = "<group>"; };
-		11965BCA2A2A574500ABE0F9 /* FormationUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormationUtils.swift; sourceTree = "<group>"; };
+		11965BCA2A2A574500ABE0F9 /* CommandHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandHelpers.swift; sourceTree = "<group>"; };
 		11AB0C8C2A287C03006F8627 /* FindShips.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindShips.swift; sourceTree = "<group>"; };
 		11D76E5C2A22E8E800E75455 /* manex.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = manex.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		11D76E5F2A22E8E800E75455 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -113,7 +113,7 @@
 				11965BBC2A2A2DC700ABE0F9 /* FormationCommandFactory.swift */,
 				11965BC62A2A536D00ABE0F9 /* FormationGolfTrueBearingCommandHandler.swift */,
 				11965BC82A2A538E00ABE0F9 /* FormationTrueBearingWithDivHandler.swift */,
-				11965BCA2A2A574500ABE0F9 /* FormationUtils.swift */,
+				11965BCA2A2A574500ABE0F9 /* CommandHelpers.swift */,
 			);
 			path = CommandHandlers;
 			sourceTree = "<group>";
@@ -340,7 +340,7 @@
 				11D76EA32A22F5FF00E75455 /* KeyboardToolbar.swift in Sources */,
 				11D76E872A22F4DB00E75455 /* ContainerViewController.swift in Sources */,
 				11D76EA52A22F60F00E75455 /* FormationCalculator.swift in Sources */,
-				11965BCB2A2A574500ABE0F9 /* FormationUtils.swift in Sources */,
+				11965BCB2A2A574500ABE0F9 /* CommandHelpers.swift in Sources */,
 				11D76E9F2A22F5F100E75455 /* MenuButtons.swift in Sources */,
 				11D76E832A22F4C500E75455 /* MenuViewController.swift in Sources */,
 			);

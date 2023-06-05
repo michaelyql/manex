@@ -153,31 +153,7 @@ extension GameViewController {
         
         let userInputs = getFormationViewUserInputs()
         let refShip = gameScene.warshipsArray[currentReferenceShip.tag] // tag is from 0-7
-        gameScene.executeFormations(with: userInputs, withReferenceTo: refShip)
-        
-        // pass user input to game scene
-        return 
-        guard currentReferenceShip.tag <= Warship.numberOfShips else { return }
-        if let scene = skView.scene as? GameScene {
-            if let trueBrgText = self.commandMenu.formationView.trueBrgTextField.text,
-                let trueBrg = Double(trueBrgText) {
-                scene.executeFormation(isFormGOn: self.commandMenu.formationView.golfSwitch.isOn,
-                                       trueBrg: CGFloat(trueBrg),
-                                       relativeDir: -1,
-                                       relBrg: nil,
-                                       divSeparation: self.commandMenu.formationView.divSegmentControl.selectedSegmentIndex,
-                                       refShipIndex: currentReferenceShip.tag)
-            }
-            else if let relBrgText = self.commandMenu.formationView.relBrgTextField.text,
-                        let relBrg = Double(relBrgText) {
-                scene.executeFormation(isFormGOn: self.commandMenu.formationView.golfSwitch.isOn,
-                                       trueBrg: nil,
-                                       relativeDir: self.commandMenu.formationView.relDirSegmentControl.selectedSegmentIndex,
-                                       relBrg: CGFloat(relBrg),
-                                       divSeparation: self.commandMenu.formationView.divSegmentControl.selectedSegmentIndex,
-                                       refShipIndex: currentReferenceShip.tag)
-            }
-        }
+        gameScene.executeFormation(with: userInputs, withReferenceTo: refShip)
     }
     
     func getFormationViewUserInputs() -> FormationInputs {
