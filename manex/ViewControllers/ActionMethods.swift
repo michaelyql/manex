@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Instructions
 
 extension GameViewController {
     
@@ -22,6 +23,11 @@ extension GameViewController {
                 self.toggleOnToolbarButton.alpha = 0.0
             }
             isToolbarShowing.toggle()
+        }
+        
+        // coachmarks
+        if isCoachMarkShowing {
+            self.coachMarksController.flow.showNext()
         }
     }
     
@@ -43,10 +49,20 @@ extension GameViewController {
     
     @objc func didTapAddShipButton() {
         gameScene.addShip()
+        
+        // coachmarks
+        if isCoachMarkShowing {
+            self.coachMarksController.flow.showNext()
+        }
     }
     
     @objc func didTapRemoveShipButton() {
         gameScene.removeShip()
+        
+        // coachmarks
+        if isCoachMarkShowing {
+            self.coachMarksController.flow.showNext()
+        }
     }
     
     @objc func toggleTurnButton() {
@@ -57,6 +73,11 @@ extension GameViewController {
     @objc func didTapInfoButton() {
         isInfoViewShowing.toggle()
         gameScene.toggleInfoView(isShowing: isInfoViewShowing)
+        
+        // coachmarks
+        if isCoachMarkShowing {
+            self.coachMarksController.flow.showNext()
+        }
     }
     
     // MARK: - FORMATION SCROLL VIEW
@@ -79,6 +100,11 @@ extension GameViewController {
             }
         }
         isFormationScrollViewShowing.toggle()
+        
+        // coachmarks
+        if isCoachMarkShowing {
+            self.coachMarksController.flow.showNext()
+        }
     }
     
     @objc func didTapFormationOptionsButton() {
@@ -108,6 +134,11 @@ extension GameViewController {
             referenceShipSelectionMenu.alpha = 0.0
         }
         isCommandMenuShowing.toggle()
+        
+        // coachmarks
+        if isCoachMarkShowing {
+            self.coachMarksController.flow.showNext()
+        }
     }
     
     @objc func commandMenuValueDidChange(_ sender: UISegmentedControl) {

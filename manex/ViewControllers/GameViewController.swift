@@ -7,6 +7,7 @@
 
 import UIKit
 import SpriteKit
+import Instructions
 
 class GameViewController: UIViewController {
 
@@ -26,6 +27,9 @@ class GameViewController: UIViewController {
     var isFormationScrollViewShowing: Bool = false
     var isInfoViewShowing: Bool = false
     var isCommandMenuShowing: Bool = false
+    // coachmarks
+    let coachMarksController = CoachMarksController()
+    var isCoachMarkShowing: Bool = false
     
     // MARK: - METHODS
     override func viewDidLoad() {
@@ -55,6 +59,10 @@ class GameViewController: UIViewController {
             setupToolbarToggleOnButton()
             setupFormationScrollView()
             setupCommandMenu()
+            
+            coachMarksController.dataSource = self
+            coachMarksController.overlay.isUserInteractionEnabled = true
+            coachMarksController.overlay.backgroundColor = UIColor(red: 0.4, green: 0.4, blue: 0.4, alpha: 0.4)
         }
     }
     
@@ -68,5 +76,19 @@ class GameViewController: UIViewController {
     
     override var prefersStatusBarHidden: Bool {
         return true
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        self.coachMarksController.start(in: .window(over: self))
+        self.isCoachMarkShowing = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        self.coachMarksController.stop(immediately: true)
+        self.isCoachMarkShowing = false
     }
 }

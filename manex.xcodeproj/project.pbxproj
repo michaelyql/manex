@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		117010972A2DD17200CB76F2 /* Instructions in Frameworks */ = {isa = PBXBuildFile; productRef = 117010962A2DD17200CB76F2 /* Instructions */; };
 		11965BBB2A2A077E00ABE0F9 /* MoveShips.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11965BBA2A2A077E00ABE0F9 /* MoveShips.swift */; };
 		11965BBD2A2A2DC700ABE0F9 /* FormationCommandFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11965BBC2A2A2DC700ABE0F9 /* FormationCommandFactory.swift */; };
 		11965BBF2A2A306A00ABE0F9 /* UserInputs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11965BBE2A2A306A00ABE0F9 /* UserInputs.swift */; };
@@ -33,7 +34,7 @@
 		11D76E952A22F58300E75455 /* CoreFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D76E942A22F58300E75455 /* CoreFunctions.swift */; };
 		11D76E972A22F58F00E75455 /* SignalExecution.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D76E962A22F58F00E75455 /* SignalExecution.swift */; };
 		11D76E992A22F5AB00E75455 /* SignalExecutionHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D76E982A22F5AB00E75455 /* SignalExecutionHelpers.swift */; };
-		11D76E9B2A22F5DF00E75455 /* Delegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D76E9A2A22F5DF00E75455 /* Delegates.swift */; };
+		11D76E9B2A22F5DF00E75455 /* GameVCExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D76E9A2A22F5DF00E75455 /* GameVCExtensions.swift */; };
 		11D76E9F2A22F5F100E75455 /* MenuButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D76E9E2A22F5F100E75455 /* MenuButtons.swift */; };
 		11D76EA12A22F5F900E75455 /* CommandMenuFormationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D76EA02A22F5F900E75455 /* CommandMenuFormationView.swift */; };
 		11D76EA32A22F5FF00E75455 /* KeyboardToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D76EA22A22F5FF00E75455 /* KeyboardToolbar.swift */; };
@@ -78,7 +79,7 @@
 		11D76E942A22F58300E75455 /* CoreFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreFunctions.swift; sourceTree = "<group>"; };
 		11D76E962A22F58F00E75455 /* SignalExecution.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignalExecution.swift; sourceTree = "<group>"; };
 		11D76E982A22F5AB00E75455 /* SignalExecutionHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignalExecutionHelpers.swift; sourceTree = "<group>"; };
-		11D76E9A2A22F5DF00E75455 /* Delegates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Delegates.swift; sourceTree = "<group>"; };
+		11D76E9A2A22F5DF00E75455 /* GameVCExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameVCExtensions.swift; sourceTree = "<group>"; };
 		11D76E9E2A22F5F100E75455 /* MenuButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuButtons.swift; sourceTree = "<group>"; };
 		11D76EA02A22F5F900E75455 /* CommandMenuFormationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandMenuFormationView.swift; sourceTree = "<group>"; };
 		11D76EA22A22F5FF00E75455 /* KeyboardToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardToolbar.swift; sourceTree = "<group>"; };
@@ -100,6 +101,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				117010972A2DD17200CB76F2 /* Instructions in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -179,7 +181,7 @@
 				11D76E862A22F4DB00E75455 /* ContainerViewController.swift */,
 				11D76E8A2A22F50B00E75455 /* GameViewController.swift */,
 				11D76E882A22F4F100E75455 /* GameViewControllerSetup.swift */,
-				11D76E9A2A22F5DF00E75455 /* Delegates.swift */,
+				11D76E9A2A22F5DF00E75455 /* GameVCExtensions.swift */,
 				11D76E902A22F55100E75455 /* ActionMethods.swift */,
 				11965BC02A2A3AF200ABE0F9 /* ErrorHandlers.swift */,
 			);
@@ -250,6 +252,9 @@
 			dependencies = (
 			);
 			name = manex;
+			packageProductDependencies = (
+				117010962A2DD17200CB76F2 /* Instructions */,
+			);
 			productName = manex;
 			productReference = 11D76E5C2A22E8E800E75455 /* manex.app */;
 			productType = "com.apple.product-type.application";
@@ -278,6 +283,9 @@
 				Base,
 			);
 			mainGroup = 11D76E532A22E8E800E75455;
+			packageReferences = (
+				117010952A2DD17200CB76F2 /* XCRemoteSwiftPackageReference "Instructions" */,
+			);
 			productRefGroup = 11D76E5D2A22E8E800E75455 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -317,7 +325,7 @@
 				11D76E912A22F55200E75455 /* ActionMethods.swift in Sources */,
 				11D76EAB2A22F62600E75455 /* UIViewExtensions.swift in Sources */,
 				11965BC92A2A538E00ABE0F9 /* FormationTrueBearingWithDivHandler.swift in Sources */,
-				11D76E9B2A22F5DF00E75455 /* Delegates.swift in Sources */,
+				11D76E9B2A22F5DF00E75455 /* GameVCExtensions.swift in Sources */,
 				11965BC12A2A3AF200ABE0F9 /* ErrorHandlers.swift in Sources */,
 				11D76EC12A238F7600E75455 /* CommandMenuCorpenView.swift in Sources */,
 				11965BBD2A2A2DC700ABE0F9 /* FormationCommandFactory.swift in Sources */,
@@ -560,6 +568,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		117010952A2DD17200CB76F2 /* XCRemoteSwiftPackageReference "Instructions" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ephread/Instructions";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		117010962A2DD17200CB76F2 /* Instructions */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 117010952A2DD17200CB76F2 /* XCRemoteSwiftPackageReference "Instructions" */;
+			productName = Instructions;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 11D76E542A22E8E800E75455 /* Project object */;
 }
