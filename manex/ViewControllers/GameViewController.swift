@@ -62,7 +62,7 @@ class GameViewController: UIViewController {
             
             coachMarksController.dataSource = self
             coachMarksController.overlay.isUserInteractionEnabled = true
-            coachMarksController.overlay.backgroundColor = UIColor(red: 0.4, green: 0.4, blue: 0.4, alpha: 0.4)
+            coachMarksController.overlay.backgroundColor = UIColor(red: 0.4, green: 0.4, blue: 0.4, alpha: 0.2)
         }
     }
     
@@ -81,7 +81,7 @@ class GameViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
-        self.coachMarksController.start(in: .window(over: self))
+//        self.coachMarksController.start(in: .window(over: self))
         self.isCoachMarkShowing = true
     }
     

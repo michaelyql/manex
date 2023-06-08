@@ -43,7 +43,7 @@ class CommandMenuFormationView: UIStackView {
         row1.isLayoutMarginsRelativeArrangement = true
         let row1Label = UILabel()
         row1Label.text = "FORM G"
-        row1Label.textColor = .black
+        row1Label.textColor = .systemBlue
         let row1Switch = UISwitch(frame: CGRect(x: 0, y: 0, width: 90, height: 20))
         self.golfSwitch = row1Switch
         row1Switch.preferredStyle = .sliding
@@ -60,7 +60,7 @@ class CommandMenuFormationView: UIStackView {
         row2.isLayoutMarginsRelativeArrangement = true
         let row2Label = UILabel()
         row2Label.text = "TRUE BRG"
-        row2Label.textColor = .black
+        row2Label.textColor = .systemBlue
         let row2TextField = UITextField()
         self.trueBrgTextField = row2TextField
         row2TextField.clearsOnBeginEditing = true

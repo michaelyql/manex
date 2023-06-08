@@ -62,7 +62,7 @@ class FormationScrollView: UIStackView {
         optionsButton.setImage(UIImage(systemName: "slider.horizontal.3"), for: .normal)
         self.optionsButton = optionsButton
         optionsButton.setPreferredSymbolConfiguration(largeSymbolConfig, forImageIn: .normal)
-        optionsButton.backgroundColor = .systemGray5
+        optionsButton.backgroundColor = .white
         self.addArrangedSubview(optionsButton)
         optionsButton.translatesAutoresizingMaskIntoConstraints = false
         optionsButton.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMaxXMinYCorner]
