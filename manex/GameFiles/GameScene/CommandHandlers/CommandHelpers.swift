@@ -234,6 +234,23 @@ class CommandHelpers {
     // haulOutToStbd() is not implemented. The rationale behind this is that the user does not need
     // to control whether the ships haul out to port or stbd since the resultant formation is the same.
     
+    static func haulOut(to trueBrg: CGFloat, warships: [Warship], refShip: Warship) {
+        
+        // compare true brg with ref ship's heading
+        
+        // if refShipHdg - trueBrg > 0 means haul out to stbd
+        // else if refShipHdg - trueBrg < 0 means haul out to port
+        // if refShipHdg == trueBrg return immediately, since this function should not handle that case
+        
+        // calculate ref ship position projected 100 units away
+        
+        // from projected ref ship position, generate new positions based on true hdg
+        
+        // for each ship, calculate the control pt between their original pos and destination pos
+        // use perpendicular lines (90º)
+        // finally, each ship runs skaction follow path after appropriate delay time
+    }
+    
     static func haulOutastern() {
         
     }

@@ -111,8 +111,8 @@
 		11965BC32A2A52FD00ABE0F9 /* CommandHandlers */ = {
 			isa = PBXGroup;
 			children = (
-				11965BC42A2A530F00ABE0F9 /* FormationTrueBearingCommandHandler.swift */,
 				11965BBC2A2A2DC700ABE0F9 /* FormationCommandFactory.swift */,
+				11965BC42A2A530F00ABE0F9 /* FormationTrueBearingCommandHandler.swift */,
 				11965BC62A2A536D00ABE0F9 /* FormationGolfTrueBearingCommandHandler.swift */,
 				11965BC82A2A538E00ABE0F9 /* FormationTrueBearingWithDivHandler.swift */,
 				11965BCA2A2A574500ABE0F9 /* CommandHelpers.swift */,
