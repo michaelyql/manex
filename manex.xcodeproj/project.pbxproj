@@ -10,7 +10,6 @@
 		117010972A2DD17200CB76F2 /* Instructions in Frameworks */ = {isa = PBXBuildFile; productRef = 117010962A2DD17200CB76F2 /* Instructions */; };
 		11965BBB2A2A077E00ABE0F9 /* MoveShips.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11965BBA2A2A077E00ABE0F9 /* MoveShips.swift */; };
 		11965BBD2A2A2DC700ABE0F9 /* FormationCommandFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11965BBC2A2A2DC700ABE0F9 /* FormationCommandFactory.swift */; };
-		11965BBF2A2A306A00ABE0F9 /* UserInputs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11965BBE2A2A306A00ABE0F9 /* UserInputs.swift */; };
 		11965BC12A2A3AF200ABE0F9 /* ErrorHandlers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11965BC02A2A3AF200ABE0F9 /* ErrorHandlers.swift */; };
 		11965BC52A2A530F00ABE0F9 /* FormationTrueBearingCommandHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11965BC42A2A530F00ABE0F9 /* FormationTrueBearingCommandHandler.swift */; };
 		11965BC72A2A536D00ABE0F9 /* FormationGolfTrueBearingCommandHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11965BC62A2A536D00ABE0F9 /* FormationGolfTrueBearingCommandHandler.swift */; };
@@ -20,6 +19,8 @@
 		11C595772A36B30F00331ECE /* manexTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C595762A36B30F00331ECE /* manexTests.swift */; };
 		11C5957E2A36B36200331ECE /* CommandHelpersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C5957D2A36B36100331ECE /* CommandHelpersTests.swift */; };
 		11C595802A37084C00331ECE /* CorpenCommandFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C5957F2A37084C00331ECE /* CorpenCommandFactory.swift */; };
+		11C595822A370AFC00331ECE /* CorpenTrueBrgCommandHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C595812A370AFC00331ECE /* CorpenTrueBrgCommandHandler.swift */; };
+		11C595842A370FC900331ECE /* CorpenDeltaCommandHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C595832A370FC900331ECE /* CorpenDeltaCommandHandler.swift */; };
 		11D76E602A22E8E800E75455 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D76E5F2A22E8E800E75455 /* AppDelegate.swift */; };
 		11D76E6B2A22E8E800E75455 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11D76E692A22E8E800E75455 /* Main.storyboard */; };
 		11D76E6D2A22E8EC00E75455 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 11D76E6C2A22E8EC00E75455 /* Assets.xcassets */; };
@@ -67,7 +68,6 @@
 /* Begin PBXFileReference section */
 		11965BBA2A2A077E00ABE0F9 /* MoveShips.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveShips.swift; sourceTree = "<group>"; };
 		11965BBC2A2A2DC700ABE0F9 /* FormationCommandFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormationCommandFactory.swift; sourceTree = "<group>"; };
-		11965BBE2A2A306A00ABE0F9 /* UserInputs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInputs.swift; sourceTree = "<group>"; };
 		11965BC02A2A3AF200ABE0F9 /* ErrorHandlers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorHandlers.swift; sourceTree = "<group>"; };
 		11965BC42A2A530F00ABE0F9 /* FormationTrueBearingCommandHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormationTrueBearingCommandHandler.swift; sourceTree = "<group>"; };
 		11965BC62A2A536D00ABE0F9 /* FormationGolfTrueBearingCommandHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormationGolfTrueBearingCommandHandler.swift; sourceTree = "<group>"; };
@@ -78,6 +78,8 @@
 		11C595762A36B30F00331ECE /* manexTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = manexTests.swift; sourceTree = "<group>"; };
 		11C5957D2A36B36100331ECE /* CommandHelpersTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandHelpersTests.swift; sourceTree = "<group>"; };
 		11C5957F2A37084C00331ECE /* CorpenCommandFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CorpenCommandFactory.swift; sourceTree = "<group>"; };
+		11C595812A370AFC00331ECE /* CorpenTrueBrgCommandHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CorpenTrueBrgCommandHandler.swift; sourceTree = "<group>"; };
+		11C595832A370FC900331ECE /* CorpenDeltaCommandHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CorpenDeltaCommandHandler.swift; sourceTree = "<group>"; };
 		11D76E5C2A22E8E800E75455 /* manex.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = manex.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		11D76E5F2A22E8E800E75455 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		11D76E6A2A22E8E800E75455 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -139,8 +141,10 @@
 				11965BC42A2A530F00ABE0F9 /* FormationTrueBearingCommandHandler.swift */,
 				11965BC62A2A536D00ABE0F9 /* FormationGolfTrueBearingCommandHandler.swift */,
 				11965BC82A2A538E00ABE0F9 /* FormationTrueBearingWithDivHandler.swift */,
-				11965BCA2A2A574500ABE0F9 /* CommandHelpers.swift */,
 				11C5957F2A37084C00331ECE /* CorpenCommandFactory.swift */,
+				11C595812A370AFC00331ECE /* CorpenTrueBrgCommandHandler.swift */,
+				11C595832A370FC900331ECE /* CorpenDeltaCommandHandler.swift */,
+				11965BCA2A2A574500ABE0F9 /* CommandHelpers.swift */,
 			);
 			path = CommandHandlers;
 			sourceTree = "<group>";
@@ -267,7 +271,6 @@
 				11D76E982A22F5AB00E75455 /* SignalExecutionHelpers.swift */,
 				11AB0C8C2A287C03006F8627 /* FindShips.swift */,
 				11965BBA2A2A077E00ABE0F9 /* MoveShips.swift */,
-				11965BBE2A2A306A00ABE0F9 /* UserInputs.swift */,
 			);
 			path = SignalExecution;
 			sourceTree = "<group>";
@@ -389,6 +392,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				11C595802A37084C00331ECE /* CorpenCommandFactory.swift in Sources */,
+				11C595822A370AFC00331ECE /* CorpenTrueBrgCommandHandler.swift in Sources */,
 				11D76E852A22F4D700E75455 /* HomeViewController.swift in Sources */,
 				11D76E892A22F4F100E75455 /* GameViewControllerSetup.swift in Sources */,
 				11AB0C8D2A287C03006F8627 /* FindShips.swift in Sources */,
@@ -403,10 +407,10 @@
 				11965BC92A2A538E00ABE0F9 /* FormationTrueBearingWithDivHandler.swift in Sources */,
 				11D76E9B2A22F5DF00E75455 /* GameVCExtensions.swift in Sources */,
 				11965BC12A2A3AF200ABE0F9 /* ErrorHandlers.swift in Sources */,
+				11C595842A370FC900331ECE /* CorpenDeltaCommandHandler.swift in Sources */,
 				11D76EC12A238F7600E75455 /* CommandMenuCorpenView.swift in Sources */,
 				11965BBD2A2A2DC700ABE0F9 /* FormationCommandFactory.swift in Sources */,
 				11D76EB12A22F64A00E75455 /* GameSceneUtilities.swift in Sources */,
-				11965BBF2A2A306A00ABE0F9 /* UserInputs.swift in Sources */,
 				11D76E992A22F5AB00E75455 /* SignalExecutionHelpers.swift in Sources */,
 				11965BC52A2A530F00ABE0F9 /* FormationTrueBearingCommandHandler.swift in Sources */,
 				11965BBB2A2A077E00ABE0F9 /* MoveShips.swift in Sources */,

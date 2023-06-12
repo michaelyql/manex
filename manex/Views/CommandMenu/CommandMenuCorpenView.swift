@@ -80,8 +80,19 @@ class CommandMenuCorpenView: UIStackView {
     required init(coder: NSCoder) {
         fatalError("not implemented")
     }
+    
+    func getUserInputs() -> CorpenInputs {
+        var trueBrg: CGFloat?
+        
+        if let trueBrgText = trueBrgTextField.text, let temp = Double(trueBrgText) {
+            trueBrg = CGFloat(temp)
+        }
+        
+        return CorpenInputs(isDeltaSwitchOn: deltaSwitch.isOn, trueBrg: trueBrg)
+    }
 }
 
 struct CorpenInputs {
-    
+    let isDeltaSwitchOn: Bool
+    let trueBrg: CGFloat?
 }

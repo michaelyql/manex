@@ -21,7 +21,7 @@ extension GameScene {
         }
     }
     
-    func executeCorpen(isCorpenDOn: Bool, trueBrg: CGFloat) {
+    func executeCorpen(with corpenInputs: CorpenInputs) {
         print("executing corpen")
     }
     

@@ -197,13 +197,12 @@ extension GameViewController {
         self.isCommandMenuShowing = false
         self.view.endEditing(true)
         
-        // pass in user input
-        if let scene = skView.scene as? GameScene {
-            if let trueBrgText = self.commandMenu.corpenView.trueBrgTextField.text,
-                let trueBrg = Double(trueBrgText) {
-                scene.executeCorpen(isCorpenDOn: self.commandMenu.corpenView.deltaSwitch.isOn, trueBrg: CGFloat(trueBrg))
-            }
-        }
+        let userInputs = getCorpenViewUserInputs()
+        gameScene.executeCorpen(with: userInputs)
+    }
+    
+    private func getCorpenViewUserInputs() -> CorpenInputs {
+        return commandMenu.corpenView.getUserInputs()
     }
     
     @objc func executeTurn() {
