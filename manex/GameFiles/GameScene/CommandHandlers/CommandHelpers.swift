@@ -8,8 +8,6 @@
 import SpriteKit
 import UIKit
 
-// TODO: - Port all of the signal execution utility functions over to this class 
-
 class CommandHelpers {
     
     static func getCurrentShipsPosition(warships: [Warship]) -> [CGPoint] {
@@ -116,6 +114,17 @@ class CommandHelpers {
         return newPts
     }
     
+    static func generatePositionsForTrueOnly(warships: [Warship], trueBrg: CGFloat, refPoint: CGPoint) -> [CGPoint] {
+        var newPts: [CGPoint] = []
+        let angleInRadians = trueBrg / 180 * .pi
+        
+        for ship in warships {
+            
+        }
+        
+        return newPts
+    }
+    
     static func calculateTotalDistanceTravelledBetween(origin: [CGPoint], destination: [CGPoint]) -> CGFloat {
         guard origin.count == destination.count else { return -1 }
         
@@ -131,6 +140,7 @@ class CommandHelpers {
     }
     
     static func move(warships: [Warship], to newPos: [CGPoint], refShip: Warship) {
+        print("debug move")
         guard newPos.count == warships.count else { return }
         
         let prevHeading = refShip.zRotation
@@ -183,6 +193,7 @@ class CommandHelpers {
     }
     
     static func haulOutToPort(warships: [Warship], shipToHaulOutLast: Warship) {
+        print("debug haul out to port")
         let offset = -shipToHaulOutLast.zRotation
         
         if warships[0] == shipToHaulOutLast {
@@ -230,30 +241,55 @@ class CommandHelpers {
             print("Error")
         }
     }
-    // haulOutToStbd() is not implemented. The rationale behind this is that the user does not need
-    // to control whether the ships haul out to port or stbd since the resultant formation is the same.
     
     static func haulOut(to trueBrg: CGFloat, warships: [Warship], refShip: Warship) {
+        print("debug haulOut")
+        let angleInRadians = trueBrg / 180 * .pi
+        let offset = -refShip.zRotation
+        var projectedX: CGFloat = .zero
+        var projectedY: CGFloat = .zero
+        var controlPointBrg: CGFloat = .zero
+        let refShipIsRoot = refShip == warships[0]
         
-        let projectedPos: CGPoint
-        
-        if refShip.getAsternBearing() - trueBrg > 0 {
+        // check which side is trueBrg on, then calculate the projected position
+        if (trueBrg + 360) < (refShip.getAsternBearing() + 210) {
+            // project to the right
+            projectedX = refShip.position.x + 100 * sin(offset + .pi/2)
+            projectedY = refShip.position.y + 100 * cos(offset + .pi/2)
+            controlPointBrg = offset + .pi/2
+        }
+        else if (trueBrg + 360) > (refShip.getAsternBearing() + 510) {
+            // project to the left
+            projectedX = refShip.position.x + 100 * sin(offset - .pi/2)
+            projectedY = refShip.position.y + 100 * cos(offset - .pi/2)
+            controlPointBrg = offset - .pi/2
+        }
+        // for each ship that is not the refship
+        for ship in warships {
+            let multiplier = abs(refShip.sequenceNum-ship.sequenceNum)
+            let newX = projectedX + 150 * sin(angleInRadians) * CGFloat(multiplier)
+            let newY = projectedY + 150 * cos(angleInRadians) * CGFloat(multiplier)
+            let controlPoint = CGPoint(x: ship.position.x + 100 * sin(controlPointBrg),
+                                       y: ship.position.y + 100 * cos(controlPointBrg))
+            let pathToDest = UIBezierPath()
+            pathToDest.move(to: ship.position)
+            pathToDest.addQuadCurve(to: CGPoint(x: newX, y: newY), controlPoint: controlPoint)
+            let moveAction = SKAction.follow(pathToDest.cgPath, asOffset: false, orientToPath: true, speed: 120)
             
-        }
-        else if refShip.getAsternBearing() - trueBrg < 0 {
+            var waitAction: SKAction
+            if refShipIsRoot {
+                waitAction = SKAction.wait(forDuration: TimeInterval(CGFloat(Warship.numberOfShips-ship.sequenceNum)) * 2.4)
+            }
+            else {
+                waitAction = SKAction.wait(forDuration: TimeInterval(CGFloat(ship.sequenceNum-1)) * 2.4)
+            }
             
+            ship.run(waitAction, completion: {
+                ship.run(moveAction, completion: {
+                    ship.zRotation = -offset
+                })
+            })
         }
-        else {
-            return
-        }
-        
-        // calculate ref ship position projected 100 units away
-        
-        // from projected ref ship position, generate new positions based on true hdg
-        
-        // for each ship, calculate the control pt between their original pos and destination pos
-        // use perpendicular lines (90º)
-        // finally, each ship runs skaction follow path after appropriate delay time
     }
     
     static func haulOutastern() {
