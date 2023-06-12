@@ -187,7 +187,7 @@ extension GameViewController {
         gameScene.executeFormation(with: userInputs, withReferenceTo: refShip)
     }
     
-    func getFormationViewUserInputs() -> FormationInputs {
+    private func getFormationViewUserInputs() -> FormationInputs {
         return commandMenu.formationView.getUserInputs()
     }
     
@@ -212,21 +212,12 @@ extension GameViewController {
         self.isCommandMenuShowing = false
         self.view.endEditing(true)
         
-        // pass in user input
-        if let scene = skView.scene as? GameScene {
-            if let trueBrgText = self.commandMenu.turnView.trueBrgTextField.text,
-                let trueBrg = Double(trueBrgText) {
-                scene.executeTurn(trueBrg: CGFloat(trueBrg),
-                                  relativeDir: self.commandMenu.turnView.relDirSegmentControl.selectedSegmentIndex,
-                                  relBrg: nil)
-            }
-            else if let relBrgText = self.commandMenu.turnView.relBrgTextField.text,
-                        let relBrg = Double(relBrgText) {
-                scene.executeTurn(trueBrg: nil,
-                                  relativeDir: self.commandMenu.turnView.relDirSegmentControl.selectedSegmentIndex,
-                                  relBrg: CGFloat(relBrg))
-            }
-        }
+        let userInputs = getTurnViewUserInputs()
+        gameScene.executeTurn(with: userInputs)
+    }
+    
+    private func getTurnViewUserInputs() -> TurnInputs {
+        return commandMenu.turnView.getUserInputs()
     }
     
     @objc func resetCommandMenu() {

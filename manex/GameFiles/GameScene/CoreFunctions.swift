@@ -64,8 +64,8 @@ extension GameScene {
             formation11()
         case .twelve:
             formation12()
-        case .lineOfBearing:
-            truelineOfBearing(self.formationBearing)
+//        case .lineOfBearing:
+//            truelineOfBearing(self.formationBearing)
         default:
             break
         }
@@ -125,7 +125,6 @@ extension GameScene {
             }
             warshipsArray[i].zRotation = warshipsArray[i-1].zRotation
         }
-        self.formationBearing = (-warshipsArray[0].zRotation / .pi * 180 + CGFloat(180)).truncatingRemainder(dividingBy: CGFloat(360))
     }
     // subdiv in column, subdiv guides bearing abeam to port
     func formation8() {
@@ -145,7 +144,6 @@ extension GameScene {
             }
             warshipsArray[i].zRotation = warshipsArray[i-1].zRotation
         }
-        self.formationBearing = (-warshipsArray[0].zRotation / .pi * 180 + CGFloat(180)).truncatingRemainder(dividingBy: CGFloat(360))
     }
     // div line abreast to stbd, div guides bearing astern
     func formation9() {
@@ -179,7 +177,6 @@ extension GameScene {
             }
             warshipsArray[i].zRotation = warshipsArray[i-1].zRotation
         }
-        self.formationBearing = (-warshipsArray[0].zRotation / .pi * 180 + CGFloat(90)).truncatingRemainder(dividingBy: CGFloat(360))
     }
     // subdiv line abreast to port, subdiv guides bearing astern
     func formation12() {
@@ -199,7 +196,6 @@ extension GameScene {
             }
             warshipsArray[i].zRotation = warshipsArray[i-1].zRotation
         }
-        self.formationBearing = (-warshipsArray[0].zRotation / .pi * 180 + CGFloat(270)).truncatingRemainder(dividingBy: CGFloat(360))
     }
     // start and end are the indices of the ship to start and end at respectively
     func truelineOfBearing(_ angle: CGFloat, start: Int = 1, end: Int = Warship.numberOfShips) {
@@ -211,7 +207,6 @@ extension GameScene {
                                     y: prev.position.y + 150 * cos(angleInRad))
             curr.zRotation = prev.zRotation
         }
-        self.formationBearing = angle.truncatingRemainder(dividingBy: CGFloat(360))
     }
     // warshipsArray[start] will be the ship being offset by either its X or Y pos
     func truelineOfBearingWithOffset(_ angle: CGFloat, start: Int = 1, end: Int = Warship.numberOfShips, xOffset: Double = 0, yOffset: Double = 0) {
@@ -241,7 +236,6 @@ extension GameScene {
                                     y: prev.position.y + 150 * cos(angleInRad))
             curr.zRotation = prev.zRotation
         }
-        self.formationBearing = angle.truncatingRemainder(dividingBy: CGFloat(360))
     }
     
     func updateFormation(number: Int) {

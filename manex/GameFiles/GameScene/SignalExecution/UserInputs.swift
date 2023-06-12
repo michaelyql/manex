@@ -18,3 +18,9 @@ struct FormationInputs: UserInputs {
     let relDir: Int
     let divSeparation: Int
 }
+
+struct TurnInputs: UserInputs {
+    let trueBrg: CGFloat?
+    let relBrg: CGFloat?
+    let relDir: Int
+}

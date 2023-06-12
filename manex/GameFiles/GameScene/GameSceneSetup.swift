@@ -198,7 +198,6 @@ extension GameScene {
                 default:
                     break
                 }
-                formationBearing = ((rotationInRad + bearingOffset) / .pi * 180).truncatingRemainder(dividingBy: CGFloat(360))
             }
             
             prevWheelAngle = rotationInRad

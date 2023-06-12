@@ -10,7 +10,7 @@ import UIKit
 
 extension GameViewController {
     
-    func handleFormationInputError(_ error: Error) {
+    func handleUserInputError(_ error: Error) {
         print(error)
     }
 }

@@ -14,9 +14,10 @@ extension GameScene {
         do {
             let handler = try FormationCommandFactory.getCommandHandler(for: formationInputs, refShip: refShip, warships: warshipsArray)
             handler.execute()
+            setNewFormation()
         }
         catch {
-            gameVC?.handleFormationInputError(error)
+            gameVC?.handleUserInputError(error)
         }
     }
     
@@ -24,53 +25,51 @@ extension GameScene {
         print("executing corpen")
     }
     
-    func executeTurn(trueBrg: CGFloat?, relativeDir: Int, relBrg: CGFloat?) {
-        if let trueBrg = trueBrg {
-            turnShips(to: trueBrg)
-            // true bearing of formation should not change 
-            // only the current formation should be updated
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + TURN_DURATION) { [weak self] in
-                self?.updateFormationAndFormationBearing()
+    func executeTurn(with turnInputs: TurnInputs) {
+        do {
+            if let trueBrg = turnInputs.trueBrg {
+                turnShips(to: trueBrg)
+                setNewFormation()
+            }
+            else if let relBrg = turnInputs.relBrg {
+                if turnInputs.relDir != -1 {
+                    // convert rel brg to true brg then just call the same function
+                    // 0 for port, 1 for stbd
+                    var trueBrg = CGFloat.zero
+                    let offset = -warshipsArray[0].zRotation / .pi * 180
+                    if turnInputs.relDir == 0 {
+                        trueBrg = offset - relBrg
+                    }
+                    else if turnInputs.relDir == 1 {
+                        trueBrg = (relBrg + offset).truncatingRemainder(dividingBy: 360)
+                    }
+                    turnShips(to: trueBrg)
+                    setNewFormation()
+                }
+                else {
+                    throw TurnInputError.noRelativeDirectionIndicated
+                }
             }
         }
-        else if let relBrg = relBrg {
-            if relativeDir != -1 {
-                // convert rel brg to true brg then just call the same function 
-                // 0 for port, 1 for stbd
-                var trueBrg = CGFloat.zero
-                let offset = -warshipsArray[0].zRotation / .pi * 180
-                if relativeDir == 0 {
-                    trueBrg = offset - relBrg
-                }
-                else if relativeDir == 1 {
-                    trueBrg = (relBrg + offset).truncatingRemainder(dividingBy: 360)
-                }
-                turnShips(to: trueBrg)
-                DispatchQueue.main.asyncAfter(deadline: .now() + TURN_DURATION) { [weak self] in
-                    self?.updateFormationAndFormationBearing()
-                }
-            }
-            else {
-                // throw some error here
-                // maybe send a call to game view controller as the delegate
-                // pass in the error code as the parameter
-                // VC will generate the error message view according to the message
-            }
+        catch {
+            gameVC?.handleUserInputError(error)
         }
     }
-    
+
     func corpenTrueBearing(trueBrg: CGFloat) {}
     
     func corpenRelBrg(relativeDir: Int, relBrg: CGFloat) {}
     
     func corpenDelta(trueBrg: CGFloat) {}
     
-    func updateFormationAndFormationBearing(newBrg: CGFloat? = nil) {
-        if let newBrg = newBrg {
-            self.formationBearing = newBrg
+    private func setNewFormation() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + TURN_DURATION) { [weak self] in
+            let newFormation = GameScene.formationCalculator.calculateCurrentFormation(for: self?.convertShipCoordsToPolarPoints() ?? [])
+            self?.currentFormation = newFormation
         }
-        let newFormation = GameScene.formationCalculator.calculateCurrentFormation(for: convertShipCoordsToPolarPoints())
-        self.currentFormation = newFormation
     }
+}
+
+enum TurnInputError: Error {
+    case noRelativeDirectionIndicated
 }

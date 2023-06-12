@@ -96,4 +96,17 @@ class CommandMenuTurnView: UIStackView {
     required init(coder: NSCoder) {
         fatalError("not implemented")
     }
+    
+    func getUserInputs() -> TurnInputs {
+        var trueBrg: CGFloat?
+        var relBrg: CGFloat?
+        
+        if let trueBrgText = trueBrgTextField.text, let temp = Double(trueBrgText) {
+            trueBrg = CGFloat(temp)
+        } else if let relBrgText = relBrgTextField.text, let temp = Double(relBrgText) {
+            relBrg = CGFloat(temp)
+        }
+        
+        return TurnInputs(trueBrg: trueBrg, relBrg: relBrg, relDir: relDirSegmentControl.selectedSegmentIndex)
+    }
 }

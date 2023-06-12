@@ -19,6 +19,7 @@
 		11AB0C8D2A287C03006F8627 /* FindShips.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11AB0C8C2A287C03006F8627 /* FindShips.swift */; };
 		11C595772A36B30F00331ECE /* manexTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C595762A36B30F00331ECE /* manexTests.swift */; };
 		11C5957E2A36B36200331ECE /* CommandHelpersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C5957D2A36B36100331ECE /* CommandHelpersTests.swift */; };
+		11C595802A37084C00331ECE /* CorpenCommandFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C5957F2A37084C00331ECE /* CorpenCommandFactory.swift */; };
 		11D76E602A22E8E800E75455 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D76E5F2A22E8E800E75455 /* AppDelegate.swift */; };
 		11D76E6B2A22E8E800E75455 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11D76E692A22E8E800E75455 /* Main.storyboard */; };
 		11D76E6D2A22E8EC00E75455 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 11D76E6C2A22E8EC00E75455 /* Assets.xcassets */; };
@@ -76,6 +77,7 @@
 		11C595742A36B30F00331ECE /* manexTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = manexTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		11C595762A36B30F00331ECE /* manexTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = manexTests.swift; sourceTree = "<group>"; };
 		11C5957D2A36B36100331ECE /* CommandHelpersTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandHelpersTests.swift; sourceTree = "<group>"; };
+		11C5957F2A37084C00331ECE /* CorpenCommandFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CorpenCommandFactory.swift; sourceTree = "<group>"; };
 		11D76E5C2A22E8E800E75455 /* manex.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = manex.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		11D76E5F2A22E8E800E75455 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		11D76E6A2A22E8E800E75455 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -138,6 +140,7 @@
 				11965BC62A2A536D00ABE0F9 /* FormationGolfTrueBearingCommandHandler.swift */,
 				11965BC82A2A538E00ABE0F9 /* FormationTrueBearingWithDivHandler.swift */,
 				11965BCA2A2A574500ABE0F9 /* CommandHelpers.swift */,
+				11C5957F2A37084C00331ECE /* CorpenCommandFactory.swift */,
 			);
 			path = CommandHandlers;
 			sourceTree = "<group>";
@@ -385,6 +388,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				11C595802A37084C00331ECE /* CorpenCommandFactory.swift in Sources */,
 				11D76E852A22F4D700E75455 /* HomeViewController.swift in Sources */,
 				11D76E892A22F4F100E75455 /* GameViewControllerSetup.swift in Sources */,
 				11AB0C8D2A287C03006F8627 /* FindShips.swift in Sources */,
