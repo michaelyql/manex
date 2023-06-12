@@ -80,6 +80,7 @@
 		11C5957F2A37084C00331ECE /* CorpenCommandFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CorpenCommandFactory.swift; sourceTree = "<group>"; };
 		11C595812A370AFC00331ECE /* CorpenTrueBrgCommandHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CorpenTrueBrgCommandHandler.swift; sourceTree = "<group>"; };
 		11C595832A370FC900331ECE /* CorpenDeltaCommandHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CorpenDeltaCommandHandler.swift; sourceTree = "<group>"; };
+		11C595852A37141100331ECE /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		11D76E5C2A22E8E800E75455 /* manex.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = manex.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		11D76E5F2A22E8E800E75455 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		11D76E6A2A22E8E800E75455 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -161,6 +162,7 @@
 		11D76E532A22E8E800E75455 = {
 			isa = PBXGroup;
 			children = (
+				11C595852A37141100331ECE /* README.md */,
 				11D76E5E2A22E8E800E75455 /* manex */,
 				11C595752A36B30F00331ECE /* manexTests */,
 				11D76E5D2A22E8E800E75455 /* Products */,
