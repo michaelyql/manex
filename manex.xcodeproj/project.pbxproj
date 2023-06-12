@@ -17,6 +17,8 @@
 		11965BC92A2A538E00ABE0F9 /* FormationTrueBearingWithDivHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11965BC82A2A538E00ABE0F9 /* FormationTrueBearingWithDivHandler.swift */; };
 		11965BCB2A2A574500ABE0F9 /* CommandHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11965BCA2A2A574500ABE0F9 /* CommandHelpers.swift */; };
 		11AB0C8D2A287C03006F8627 /* FindShips.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11AB0C8C2A287C03006F8627 /* FindShips.swift */; };
+		11C595772A36B30F00331ECE /* manexTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C595762A36B30F00331ECE /* manexTests.swift */; };
+		11C5957E2A36B36200331ECE /* CommandHelpersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C5957D2A36B36100331ECE /* CommandHelpersTests.swift */; };
 		11D76E602A22E8E800E75455 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D76E5F2A22E8E800E75455 /* AppDelegate.swift */; };
 		11D76E6B2A22E8E800E75455 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11D76E692A22E8E800E75455 /* Main.storyboard */; };
 		11D76E6D2A22E8EC00E75455 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 11D76E6C2A22E8EC00E75455 /* Assets.xcassets */; };
@@ -51,6 +53,16 @@
 		11D76EC32A238F8600E75455 /* CommandMenuTurnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D76EC22A238F8600E75455 /* CommandMenuTurnView.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		11C595782A36B30F00331ECE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 11D76E542A22E8E800E75455 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 11D76E5B2A22E8E800E75455;
+			remoteInfo = manex;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		11965BBA2A2A077E00ABE0F9 /* MoveShips.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveShips.swift; sourceTree = "<group>"; };
 		11965BBC2A2A2DC700ABE0F9 /* FormationCommandFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormationCommandFactory.swift; sourceTree = "<group>"; };
@@ -61,6 +73,9 @@
 		11965BC82A2A538E00ABE0F9 /* FormationTrueBearingWithDivHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormationTrueBearingWithDivHandler.swift; sourceTree = "<group>"; };
 		11965BCA2A2A574500ABE0F9 /* CommandHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandHelpers.swift; sourceTree = "<group>"; };
 		11AB0C8C2A287C03006F8627 /* FindShips.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindShips.swift; sourceTree = "<group>"; };
+		11C595742A36B30F00331ECE /* manexTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = manexTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		11C595762A36B30F00331ECE /* manexTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = manexTests.swift; sourceTree = "<group>"; };
+		11C5957D2A36B36100331ECE /* CommandHelpersTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandHelpersTests.swift; sourceTree = "<group>"; };
 		11D76E5C2A22E8E800E75455 /* manex.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = manex.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		11D76E5F2A22E8E800E75455 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		11D76E6A2A22E8E800E75455 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -97,6 +112,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		11C595712A36B30F00331ECE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		11D76E592A22E8E800E75455 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -120,10 +142,20 @@
 			path = CommandHandlers;
 			sourceTree = "<group>";
 		};
+		11C595752A36B30F00331ECE /* manexTests */ = {
+			isa = PBXGroup;
+			children = (
+				11C595762A36B30F00331ECE /* manexTests.swift */,
+				11C5957D2A36B36100331ECE /* CommandHelpersTests.swift */,
+			);
+			path = manexTests;
+			sourceTree = "<group>";
+		};
 		11D76E532A22E8E800E75455 = {
 			isa = PBXGroup;
 			children = (
 				11D76E5E2A22E8E800E75455 /* manex */,
+				11C595752A36B30F00331ECE /* manexTests */,
 				11D76E5D2A22E8E800E75455 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -132,6 +164,7 @@
 			isa = PBXGroup;
 			children = (
 				11D76E5C2A22E8E800E75455 /* manex.app */,
+				11C595742A36B30F00331ECE /* manexTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -239,6 +272,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		11C595732A36B30F00331ECE /* manexTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 11C5957C2A36B30F00331ECE /* Build configuration list for PBXNativeTarget "manexTests" */;
+			buildPhases = (
+				11C595702A36B30F00331ECE /* Sources */,
+				11C595712A36B30F00331ECE /* Frameworks */,
+				11C595722A36B30F00331ECE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				11C595792A36B30F00331ECE /* PBXTargetDependency */,
+			);
+			name = manexTests;
+			productName = manexTests;
+			productReference = 11C595742A36B30F00331ECE /* manexTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		11D76E5B2A22E8E800E75455 /* manex */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 11D76E732A22E8EC00E75455 /* Build configuration list for PBXNativeTarget "manex" */;
@@ -269,6 +320,10 @@
 				LastSwiftUpdateCheck = 1400;
 				LastUpgradeCheck = 1400;
 				TargetAttributes = {
+					11C595732A36B30F00331ECE = {
+						CreatedOnToolsVersion = 14.0.1;
+						TestTargetID = 11D76E5B2A22E8E800E75455;
+					};
 					11D76E5B2A22E8E800E75455 = {
 						CreatedOnToolsVersion = 14.0.1;
 					};
@@ -291,11 +346,19 @@
 			projectRoot = "";
 			targets = (
 				11D76E5B2A22E8E800E75455 /* manex */,
+				11C595732A36B30F00331ECE /* manexTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		11C595722A36B30F00331ECE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		11D76E5A2A22E8E800E75455 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -309,6 +372,15 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		11C595702A36B30F00331ECE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				11C595772A36B30F00331ECE /* manexTests.swift in Sources */,
+				11C5957E2A36B36200331ECE /* CommandHelpersTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		11D76E582A22E8E800E75455 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -356,6 +428,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		11C595792A36B30F00331ECE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 11D76E5B2A22E8E800E75455 /* manex */;
+			targetProxy = 11C595782A36B30F00331ECE /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		11D76E692A22E8E800E75455 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
@@ -376,6 +456,40 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		11C5957A2A36B30F00331ECE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.michael.manexTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/manex.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/manex";
+			};
+			name = Debug;
+		};
+		11C5957B2A36B30F00331ECE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.michael.manexTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/manex.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/manex";
+			};
+			name = Release;
+		};
 		11D76E712A22E8EC00E75455 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -549,6 +663,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		11C5957C2A36B30F00331ECE /* Build configuration list for PBXNativeTarget "manexTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				11C5957A2A36B30F00331ECE /* Debug */,
+				11C5957B2A36B30F00331ECE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		11D76E572A22E8E800E75455 /* Build configuration list for PBXProject "manex" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

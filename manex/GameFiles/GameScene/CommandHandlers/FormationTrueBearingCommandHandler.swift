@@ -18,6 +18,7 @@ class FormationTrueBearingCommandHandler: FormationCommandHandler {
         self.warships = warships
     }
     
+    // This is an absolute abomination of a function
     func execute() {
         let coords = CommandHelpers.convertShipCoordsToPolarPoints(warships: warships)
         let currentFormation = GameScene.formationCalculator.calculateCurrentFormation(for: coords)
@@ -63,39 +64,54 @@ class FormationTrueBearingCommandHandler: FormationCommandHandler {
                 // only if there are ships both ahead and astern, then ships ahead will form on
                 // bearing indicated while ships astern form on reciprocal bearing
             }
+            
+            
             else if !shipsAhead.isEmpty {
                 if currentFormation == .one && trueBrg == refShip.getAsternBearing() {
-                    CommandHelpers.haulOutToPort(warships: warships, refShip: warships[0])
+                    CommandHelpers.haulOutToPort(warships: warships, shipToHaulOutLast: warships[0])
                 }
                 else if currentFormation == .two && trueBrg == refShip.getAsternBearing() {
-                    CommandHelpers.haulOutToPort(warships: warships, refShip: warships[Warship.numberOfShips-1])
+                    CommandHelpers.haulOutToPort(warships: warships, shipToHaulOutLast: warships[Warship.numberOfShips-1])
                 }
                 else {
-                    // if there is only ships ahead or ships astern, then all ships will form on the
-                    // true bearing indicated.
-                    // if bearing change is greater than 135º, ship at the end will haul out first 
-                    let newPos = CommandHelpers.generatePositionsForTrueOnly(warships: shipsAhead, trueBrg: trueBrg, refShip: refShip)
-                    CommandHelpers.move(warships: shipsAhead, to: newPos, refShip: refShip)
+                    if CommandHelpers.isAngleBetweenRange(angleToCheck: trueBrg, referenceAngle: refShip.getAsternBearing()) {
+                        CommandHelpers.haulOut(to: trueBrg, warships: shipsAhead, refShip: refShip)
+                    }
+                    else {
+                        let newPos = CommandHelpers.generatePositionsForTrueOnly(warships: shipsAhead, trueBrg: trueBrg, refShip: refShip)
+                        CommandHelpers.move(warships: shipsAhead, to: newPos, refShip: refShip)
+                    }
                 }
             }
+            
+            
             else if !shipsAstern.isEmpty {
                 if currentFormation == .one && trueBrg == refShip.getTrueHeading() {
-                    CommandHelpers.haulOutToPort(warships: warships, refShip: warships[0])
+                    CommandHelpers.haulOutToPort(warships: warships, shipToHaulOutLast: warships[0])
                 }
                 else if currentFormation == .two && trueBrg == refShip.getTrueHeading() {
-                    CommandHelpers.haulOutToPort(warships: warships, refShip: warships[Warship.numberOfShips-1])
+                    CommandHelpers.haulOutToPort(warships: warships, shipToHaulOutLast: warships[Warship.numberOfShips-1])
                 }
                 else {
+                    
+                    // check difference in angle
+                    
                     let newPos = CommandHelpers.generatePositionsForTrueOnly(warships: shipsAstern, trueBrg: trueBrg, refShip: refShip)
                     CommandHelpers.move(warships: shipsAstern, to: newPos, refShip: refShip)
                 }
             }
+            
+            
             else if !shipsPortBeam.isEmpty && !shipsStbdBeam.isEmpty {
                 // implement haulOutAstern() - very similar to search turn
             }
+            
+            
             else if !shipsPortBeam.isEmpty {
                 
             }
+            
+            
             else if !shipsStbdBeam.isEmpty {
                 
             }

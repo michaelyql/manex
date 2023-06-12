@@ -182,11 +182,10 @@ class CommandHelpers {
         return findShips(relBrg: 90, warships: warships, refShip: refShip)
     }
     
-    static func haulOutToPort(warships: [Warship], refShip: Warship) {
-        let offset = -refShip.zRotation
+    static func haulOutToPort(warships: [Warship], shipToHaulOutLast: Warship) {
+        let offset = -shipToHaulOutLast.zRotation
         
-        // If Ship 1 is at the end of the formation, ship 1 hauls out first
-        if warships[0] == refShip {
+        if warships[0] == shipToHaulOutLast {
             var i = CGFloat.zero
             for ship in warships {
                 let controlPointBrg = offset - .pi/2
@@ -206,8 +205,8 @@ class CommandHelpers {
                 })
             }
         }
-        // Else if the last ship (by sequence number) is at the end of the formation, it hauls out first
-        else if warships[Warship.numberOfShips-1] == refShip {
+
+        else if warships[Warship.numberOfShips-1] == shipToHaulOutLast {
             var i = CGFloat.zero
             for ship in warships.reversed() {
                 let controlPointBrg = offset - .pi/2
@@ -236,11 +235,17 @@ class CommandHelpers {
     
     static func haulOut(to trueBrg: CGFloat, warships: [Warship], refShip: Warship) {
         
-        // compare true brg with ref ship's heading
+        let projectedPos: CGPoint
         
-        // if refShipHdg - trueBrg > 0 means haul out to stbd
-        // else if refShipHdg - trueBrg < 0 means haul out to port
-        // if refShipHdg == trueBrg return immediately, since this function should not handle that case
+        if refShip.getAsternBearing() - trueBrg > 0 {
+            
+        }
+        else if refShip.getAsternBearing() - trueBrg < 0 {
+            
+        }
+        else {
+            return
+        }
         
         // calculate ref ship position projected 100 units away
         
@@ -255,4 +260,10 @@ class CommandHelpers {
         
     }
     
+    static func isAngleBetweenRange(angleToCheck: CGFloat, referenceAngle: CGFloat) -> Bool {
+        let withinLowerRange: Bool = (angleToCheck + 360) < (referenceAngle + 210)
+        let withinUpperRange: Bool = (angleToCheck + 360) > (referenceAngle + 510)
+        
+        return withinLowerRange || withinUpperRange
+    }
 }
