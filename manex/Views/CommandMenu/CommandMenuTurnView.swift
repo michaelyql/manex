@@ -110,3 +110,9 @@ class CommandMenuTurnView: UIStackView {
         return TurnInputs(trueBrg: trueBrg, relBrg: relBrg, relDir: relDirSegmentControl.selectedSegmentIndex)
     }
 }
+
+struct TurnInputs {
+    let trueBrg: CGFloat?
+    let relBrg: CGFloat?
+    let relDir: Int
+}

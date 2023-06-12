@@ -81,3 +81,7 @@ class CommandMenuCorpenView: UIStackView {
         fatalError("not implemented")
     }
 }
+
+struct CorpenInputs {
+    
+}

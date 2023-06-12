@@ -169,3 +169,12 @@ class CommandMenuFormationView: UIStackView {
                                divSeparation: divSegmentControl.selectedSegmentIndex)
     }
 }
+
+struct FormationInputs {
+    let isGolfSwitchOn: Bool
+    let trueBrg: CGFloat?
+    let relBrg: CGFloat?
+    let relDir: Int
+    let divSeparation: Int
+}
+
