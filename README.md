@@ -1,10 +1,11 @@
 #  Manex
 
 An iOS app made to help quickly visualize formation changes between ships and changes in relative velocity 
-(RelVel), built with UIKit, SpriteKit and the Instructions library. It aims to reduce the time taken to
-calculate formation changes and relvel by hand. 
+(RelVel), built with UIKit, SpriteKit and the Instructions library. 
 
-Manex currently supports the following basic functions: 
+It aims to reduce the time taken to calculate formation changes and relvel by hand. 
+
+## Supported Functions
 
 - Add/remove ships from the formation
 - 360º free hand rotation to align to any heading
