@@ -24,6 +24,19 @@ It aims to reduce the time taken to calculate formation changes and relvel by ha
   - TURN [PT/SB] [1-18]
   - TURN [000-359]
 
+## Examples
+![Onboarding Screen 1][/public/manex_screenshot_1.png "Onboarding Screen 1"]
+![Onboarding Screen 2][/public/manex_screenshot_2.png "Onboarding Screen 2"]
+![Onboarding Screen 3][/public/manex_screenshot_3.png "Onboarding Screen 3"]
+![Onboarding Screen 4][/public/manex_screenshot_4.png "Onboarding Screen 4"]
+![Onboarding Screen 5][/public/manex_screenshot_5.png "Onboarding Screen 5"]
+![Sample Formation 1][/public/manex_screenshot_6.png "Sample Formation 1"]
+![Sample Formation 2][/public/manex_screenshot_7.png "Sample Formation 2"]
+![Sample Formation 3][/public/manex_screenshot_8.png "Sample Formation 3"]
+![Sample Input][/public/manex_screenshot_9.png "Sample In[ut"]
+
+
+
 
 
 

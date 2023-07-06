@@ -81,7 +81,7 @@ class GameViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
-//        self.coachMarksController.start(in: .window(over: self))
+        self.coachMarksController.start(in: .window(over: self))
         self.isCoachMarkShowing = true
     }
     

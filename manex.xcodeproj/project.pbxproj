@@ -16,6 +16,15 @@
 		11965BC92A2A538E00ABE0F9 /* FormationTrueBearingWithDivHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11965BC82A2A538E00ABE0F9 /* FormationTrueBearingWithDivHandler.swift */; };
 		11965BCB2A2A574500ABE0F9 /* CommandHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11965BCA2A2A574500ABE0F9 /* CommandHelpers.swift */; };
 		11AB0C8D2A287C03006F8627 /* FindShips.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11AB0C8C2A287C03006F8627 /* FindShips.swift */; };
+		11AFD0782A5683A0001DA85D /* manex_screenshot_3.png in Resources */ = {isa = PBXBuildFile; fileRef = 11AFD0702A56839E001DA85D /* manex_screenshot_3.png */; };
+		11AFD0792A5683A0001DA85D /* manex_screenshot_5.png in Resources */ = {isa = PBXBuildFile; fileRef = 11AFD0712A56839E001DA85D /* manex_screenshot_5.png */; };
+		11AFD07A2A5683A0001DA85D /* manex_screenshot_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 11AFD0722A56839F001DA85D /* manex_screenshot_2.png */; };
+		11AFD07B2A5683A0001DA85D /* manex_screenshot_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 11AFD0732A56839F001DA85D /* manex_screenshot_1.png */; };
+		11AFD07C2A5683A0001DA85D /* manex_screenshot_4.png in Resources */ = {isa = PBXBuildFile; fileRef = 11AFD0742A56839F001DA85D /* manex_screenshot_4.png */; };
+		11AFD07D2A5683A0001DA85D /* manex_screenshot_7.png in Resources */ = {isa = PBXBuildFile; fileRef = 11AFD0752A56839F001DA85D /* manex_screenshot_7.png */; };
+		11AFD07E2A5683A0001DA85D /* manex_screenshot_8.png in Resources */ = {isa = PBXBuildFile; fileRef = 11AFD0762A5683A0001DA85D /* manex_screenshot_8.png */; };
+		11AFD07F2A5683A0001DA85D /* manex_screenshot_6.png in Resources */ = {isa = PBXBuildFile; fileRef = 11AFD0772A5683A0001DA85D /* manex_screenshot_6.png */; };
+		11AFD0812A568503001DA85D /* manex_screenshot_9.png in Resources */ = {isa = PBXBuildFile; fileRef = 11AFD0802A568503001DA85D /* manex_screenshot_9.png */; };
 		11C595772A36B30F00331ECE /* manexTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C595762A36B30F00331ECE /* manexTests.swift */; };
 		11C5957E2A36B36200331ECE /* CommandHelpersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C5957D2A36B36100331ECE /* CommandHelpersTests.swift */; };
 		11C595802A37084C00331ECE /* CorpenCommandFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C5957F2A37084C00331ECE /* CorpenCommandFactory.swift */; };
@@ -74,6 +83,15 @@
 		11965BC82A2A538E00ABE0F9 /* FormationTrueBearingWithDivHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormationTrueBearingWithDivHandler.swift; sourceTree = "<group>"; };
 		11965BCA2A2A574500ABE0F9 /* CommandHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandHelpers.swift; sourceTree = "<group>"; };
 		11AB0C8C2A287C03006F8627 /* FindShips.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindShips.swift; sourceTree = "<group>"; };
+		11AFD0702A56839E001DA85D /* manex_screenshot_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = manex_screenshot_3.png; sourceTree = "<group>"; };
+		11AFD0712A56839E001DA85D /* manex_screenshot_5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = manex_screenshot_5.png; sourceTree = "<group>"; };
+		11AFD0722A56839F001DA85D /* manex_screenshot_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = manex_screenshot_2.png; sourceTree = "<group>"; };
+		11AFD0732A56839F001DA85D /* manex_screenshot_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = manex_screenshot_1.png; sourceTree = "<group>"; };
+		11AFD0742A56839F001DA85D /* manex_screenshot_4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = manex_screenshot_4.png; sourceTree = "<group>"; };
+		11AFD0752A56839F001DA85D /* manex_screenshot_7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = manex_screenshot_7.png; sourceTree = "<group>"; };
+		11AFD0762A5683A0001DA85D /* manex_screenshot_8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = manex_screenshot_8.png; sourceTree = "<group>"; };
+		11AFD0772A5683A0001DA85D /* manex_screenshot_6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = manex_screenshot_6.png; sourceTree = "<group>"; };
+		11AFD0802A568503001DA85D /* manex_screenshot_9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = manex_screenshot_9.png; sourceTree = "<group>"; };
 		11C595742A36B30F00331ECE /* manexTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = manexTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		11C595762A36B30F00331ECE /* manexTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = manexTests.swift; sourceTree = "<group>"; };
 		11C5957D2A36B36100331ECE /* CommandHelpersTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandHelpersTests.swift; sourceTree = "<group>"; };
@@ -150,6 +168,22 @@
 			path = CommandHandlers;
 			sourceTree = "<group>";
 		};
+		11AFD06F2A568363001DA85D /* public */ = {
+			isa = PBXGroup;
+			children = (
+				11AFD0732A56839F001DA85D /* manex_screenshot_1.png */,
+				11AFD0722A56839F001DA85D /* manex_screenshot_2.png */,
+				11AFD0702A56839E001DA85D /* manex_screenshot_3.png */,
+				11AFD0742A56839F001DA85D /* manex_screenshot_4.png */,
+				11AFD0712A56839E001DA85D /* manex_screenshot_5.png */,
+				11AFD0772A5683A0001DA85D /* manex_screenshot_6.png */,
+				11AFD0752A56839F001DA85D /* manex_screenshot_7.png */,
+				11AFD0762A5683A0001DA85D /* manex_screenshot_8.png */,
+				11AFD0802A568503001DA85D /* manex_screenshot_9.png */,
+			);
+			path = public;
+			sourceTree = "<group>";
+		};
 		11C595752A36B30F00331ECE /* manexTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -162,6 +196,7 @@
 		11D76E532A22E8E800E75455 = {
 			isa = PBXGroup;
 			children = (
+				11AFD06F2A568363001DA85D /* public */,
 				11C595852A37141100331ECE /* README.md */,
 				11D76E5E2A22E8E800E75455 /* manex */,
 				11C595752A36B30F00331ECE /* manexTests */,
@@ -372,6 +407,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				11D76E6B2A22E8E800E75455 /* Main.storyboard in Resources */,
+				11AFD0782A5683A0001DA85D /* manex_screenshot_3.png in Resources */,
+				11AFD07E2A5683A0001DA85D /* manex_screenshot_8.png in Resources */,
+				11AFD07F2A5683A0001DA85D /* manex_screenshot_6.png in Resources */,
+				11AFD07C2A5683A0001DA85D /* manex_screenshot_4.png in Resources */,
+				11AFD07D2A5683A0001DA85D /* manex_screenshot_7.png in Resources */,
+				11AFD07A2A5683A0001DA85D /* manex_screenshot_2.png in Resources */,
+				11AFD0812A568503001DA85D /* manex_screenshot_9.png in Resources */,
+				11AFD0792A5683A0001DA85D /* manex_screenshot_5.png in Resources */,
+				11AFD07B2A5683A0001DA85D /* manex_screenshot_1.png in Resources */,
 				11D76E6D2A22E8EC00E75455 /* Assets.xcassets in Resources */,
 				11D76E702A22E8EC00E75455 /* LaunchScreen.storyboard in Resources */,
 			);
