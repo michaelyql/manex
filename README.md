@@ -25,15 +25,16 @@ It aims to reduce the time taken to calculate formation changes and relvel by ha
   - TURN [000-359]
 
 ## Examples
-![Onboarding Screen 1](./public/manex_screenshot_1.png "Onboarding Screen 1" | width=100)
-![Onboarding Screen 2](./public/manex_screenshot_2.png "Onboarding Screen 2" width=100)
-![Onboarding Screen 3](./public/manex_screenshot_3.png "Onboarding Screen 3" width=100)
-![Onboarding Screen 4](./public/manex_screenshot_4.png "Onboarding Screen 4" width=100)
-![Onboarding Screen 5](./public/manex_screenshot_5.png "Onboarding Screen 5" width=100)
-![Sample Formation 1](./public/manex_screenshot_6.png "Sample Formation 1" width=100)
-![Sample Formation 2](./public/manex_screenshot_7.png "Sample Formation 2" width=100)
-![Sample Formation 3](./public/manex_screenshot_8.png "Sample Formation 3" width=100)
-![Sample Input](./public/manex_screenshot_9.png "Sample Input" width=100)
+
+<img src="./public/manex_screenshot_1.png" alt="Onboarding Screen 1" width="200" />
+<img src="./public/manex_screenshot_2.png" alt="Onboarding Screen 2" width="200" />
+<img src="./public/manex_screenshot_3.png" alt="Onboarding Screen 3" width="200" />
+<img src="./public/manex_screenshot_4.png" alt="Onboarding Screen 4" width="200" />
+<img src="./public/manex_screenshot_5.png" alt="Onboarding Screen 5" width="200" />
+<img src="./public/manex_screenshot_6.png" alt="Sample Formation 1" width="200" />
+<img src="./public/manex_screenshot_7.png" alt="Sample Formation 2" width="200" />
+<img src="./public/manex_screenshot_8.png" alt="Sample Formation 3" width="200" />
+<img src="./public/manex_screenshot_9.png" alt="Sample Input" width="200" />
 
 
 
