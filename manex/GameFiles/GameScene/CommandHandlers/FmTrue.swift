@@ -20,13 +20,13 @@ class FormationTrueBearingCommandHandler: FormationCommandHandler {
     
     // This is an absolute abomination of a function
     func execute(parentScene: GameScene) {
-        let coords = CommandUtils.convertShipCoordsToPolarPoints(warships: warships)
-        let currentFormation = GameScene.formationCalculator.calculateCurrentFormation(for: coords)
+        let points = warships.toPolarPoints()
+        let currentFormation = FormationCalculator.calculateCurrentFormation(for: points)
         
         var resultantFormation: FormationType? = nil
         
         if currentFormation != .one && currentFormation != .two && currentFormation != .three && currentFormation != .four {
-            let currentPts: [CGPoint] = CommandUtils.getCurrentShipsPosition(warships: warships)
+            let currentPts: [CGPoint] = warships.getCurrPositions()
             
             // generate positions for true and reciprocal brg
             let trueBrgPositions = CommandUtils.generatePositionsToCompare(for: trueBrg, warships: warships, refShip: refShip)
@@ -48,8 +48,6 @@ class FormationTrueBearingCommandHandler: FormationCommandHandler {
                 else {
                     print("\(#function) failed to run. d1 and d2 are equal")
                 }
-                parentScene.currentFormation = resultantFormation
-                return
             }
         }
         else {
@@ -99,7 +97,7 @@ class FormationTrueBearingCommandHandler: FormationCommandHandler {
                     }
                     else {
                         let newPos = CommandUtils.generatePositionsForTrueOnly(warships: shipsAstern, trueBrg: trueBrg, refShip: refShip)
-                        CommandUtils.move(warships: shipsAstern, to: newPos, refShip: refShip)
+                        resultantFormation = CommandUtils.move(warships: shipsAstern, to: newPos, refShip: refShip)
                     }
                 }
             }
@@ -120,8 +118,9 @@ class FormationTrueBearingCommandHandler: FormationCommandHandler {
             }
             else {
                 print("Error - no ships found")
-                return
             }
         }
+        parentScene.currentFormation = resultantFormation
+        return
     }
 }

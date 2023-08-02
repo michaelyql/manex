@@ -64,25 +64,6 @@ extension GameScene {
         
         return p
     }
-    
-    func getCurrentShipsPosition(excludingIndex excludedIdx: Int) -> [CGPoint] {
-        var pts: [CGPoint] = []
-        for i in 0..<warshipsArray.count {
-            if i == excludedIdx {
-                continue
-            }
-            pts.append(warshipsArray[i].position)
-        }
-        return pts
-    }
-    
-    func getCurrentShipsPosition() -> [CGPoint] {
-        var pts: [CGPoint] = []
-        for i in 0..<warshipsArray.count {
-            pts.append(warshipsArray[i].position)
-        }
-        return pts
-    }
 
     func turnShips(to direction: CGFloat) {
         let angleInRad = -direction / 180 * .pi
