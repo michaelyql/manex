@@ -16,7 +16,7 @@ class FormationTrueBearingWithDivHandler: FormationCommandHandler {
         self.refShip = refShip
     }
     
-    func execute() {
+    func execute(parentScene: GameScene) {
         
     }
 }

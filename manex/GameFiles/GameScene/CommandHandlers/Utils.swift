@@ -7,6 +7,7 @@
 
 import SpriteKit
 import UIKit
+import Foundation
 
 class CommandUtils {
     
@@ -114,17 +115,6 @@ class CommandUtils {
         return newPts
     }
     
-    static func generatePositionsForTrueOnly(warships: [Warship], trueBrg: CGFloat, refPoint: CGPoint) -> [CGPoint] {
-        var newPts: [CGPoint] = []
-        let angleInRadians = trueBrg / 180 * .pi
-        
-        for ship in warships {
-            
-        }
-        
-        return newPts
-    }
-    
     static func calculateTotalDistanceTravelledBetween(origin: [CGPoint], destination: [CGPoint]) -> CGFloat {
         guard origin.count == destination.count else { return -1 }
         
@@ -139,11 +129,13 @@ class CommandUtils {
         return totalDist
     }
     
-    static func move(warships: [Warship], to newPos: [CGPoint], refShip: Warship) {
-        print("debug move")
-        guard newPos.count == warships.count else { return }
+    static func move(warships: [Warship], to newPos: [CGPoint], refShip: Warship) -> FormationType? {
+        print("Calling \(#function) in /\((#file.split(separator: "/")).last!)")
+        guard newPos.count == warships.count else { return nil }
         
         let prevHeading = refShip.zRotation
+        var resultantFormation: FormationType? = nil
+        
         for i in 0..<newPos.count {
             let currShip = warships[i]
             let path = UIBezierPath()
@@ -153,8 +145,13 @@ class CommandUtils {
             let moveAction = SKAction.follow(path.cgPath, asOffset: false, orientToPath: true, speed: 100)
             currShip.run(moveAction, completion: {
                 currShip.zRotation = prevHeading
+                if i == newPos.count-1 {
+                    // recalculate and update the formation
+                    resultantFormation = GameScene.formationCalculator.calculateCurrentFormation(for: convertShipCoordsToPolarPoints(warships: warships))
+                }
             })
         }
+        return resultantFormation
     }
     
     static func findShips(relBrg: CGFloat, warships: [Warship], refShip: Warship) -> [Warship] {
@@ -193,7 +190,7 @@ class CommandUtils {
     }
     
     static func haulOutToPort(warships: [Warship], shipToHaulOutLast: Warship) {
-        print("debug haul out to port")
+        print("Calling \(#function) function in \(#file)")
         let offset = -shipToHaulOutLast.zRotation
         
         if warships[0] == shipToHaulOutLast {
@@ -238,12 +235,12 @@ class CommandUtils {
             }
         }
         else {
-            print("Error")
+            print("error in \(#function) at /\((#file.split(separator: "/")).last!)")
         }
     }
     
     static func haulOut(to trueBrg: CGFloat, warships: [Warship], refShip: Warship) {
-        print("debug haulOut")
+        print("Calling \(#function) in \(#file)")
         let angleInRadians = trueBrg / 180 * .pi
         let offset = -refShip.zRotation
         var projectedX: CGFloat = .zero

@@ -19,7 +19,7 @@ class FormationGolfTrueBearingHandler: FormationCommandHandler {
         self.warships = warships
     }
     
-    func execute() {
+    func execute(parentScene: GameScene) {
          
     }
 }

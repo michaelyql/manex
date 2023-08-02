@@ -8,7 +8,7 @@
 import SpriteKit
 
 protocol FormationCommandHandler {
-    func execute()
+    func execute(parentScene: GameScene)
 }
 
 // Factory produce a specific type of CommandHandler which all have the execute() function

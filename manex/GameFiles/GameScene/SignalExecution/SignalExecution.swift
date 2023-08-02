@@ -14,8 +14,7 @@ extension GameScene {
     func executeFormation(with formationInputs: FormationInputs, withReferenceTo refShip: Warship) {
         do {
             let handler = try FormationCommandFactory.getCommandHandler(for: formationInputs, refShip: refShip, warships: warshipsArray)
-            handler.execute()
-            setNewFormation()
+            handler.execute(parentScene: self)
         }
         catch {
             gameVC?.handleUserInputError(error)
@@ -30,7 +29,6 @@ extension GameScene {
         do {
             if let trueBrg = turnInputs.trueBrg {
                 turnShips(to: trueBrg)
-                setNewFormation()
             }
             else if let relBrg = turnInputs.relBrg {
                 if turnInputs.relDir != -1 {
@@ -45,12 +43,12 @@ extension GameScene {
                         trueBrg = (relBrg + offset).truncatingRemainder(dividingBy: 360)
                     }
                     turnShips(to: trueBrg)
-                    setNewFormation()
                 }
                 else {
                     throw TurnInputError.noRelativeDirectionIndicated
                 }
             }
+            // update formation here
         }
         catch {
             gameVC?.handleUserInputError(error)
@@ -62,13 +60,6 @@ extension GameScene {
     func corpenRelBrg(relativeDir: Int, relBrg: CGFloat) {}
     
     func corpenDelta(trueBrg: CGFloat) {}
-    
-    private func setNewFormation() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + TURN_DURATION) { [weak self] in
-            let newFormation = GameScene.formationCalculator.calculateCurrentFormation(for: self?.convertShipCoordsToPolarPoints() ?? [])
-            self?.currentFormation = newFormation
-        }
-    }
 }
 
 enum TurnInputError: Error {

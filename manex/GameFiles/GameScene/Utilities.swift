@@ -37,6 +37,7 @@ extension GameScene {
     }
     
     // Each polar point gives angle relative to reference ship's heading
+    // In other words, the formation will be normalized to face 000
     func convertShipCoordsToPolarPoints() -> [PolarPoint] {
         var p: [PolarPoint] = []
         

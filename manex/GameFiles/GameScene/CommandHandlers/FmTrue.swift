@@ -19,9 +19,11 @@ class FormationTrueBearingCommandHandler: FormationCommandHandler {
     }
     
     // This is an absolute abomination of a function
-    func execute() {
+    func execute(parentScene: GameScene) {
         let coords = CommandUtils.convertShipCoordsToPolarPoints(warships: warships)
         let currentFormation = GameScene.formationCalculator.calculateCurrentFormation(for: coords)
+        
+        var resultantFormation: FormationType? = nil
         
         if currentFormation != .one && currentFormation != .two && currentFormation != .three && currentFormation != .four {
             let currentPts: [CGPoint] = CommandUtils.getCurrentShipsPosition(warships: warships)
@@ -38,15 +40,16 @@ class FormationTrueBearingCommandHandler: FormationCommandHandler {
             // if both distances are valid
             if d1 != -1 && d2 != -1 {
                 if d1 < d2 {
-                    CommandUtils.move(warships: warships, to: trueBrgPositions, refShip: refShip)
+                    resultantFormation = CommandUtils.move(warships: warships, to: trueBrgPositions, refShip: refShip)
                 }
                 else if d1 > d2 {
-                    CommandUtils.move(warships: warships, to: reciprocalPositions, refShip: refShip)
+                    resultantFormation = CommandUtils.move(warships: warships, to: reciprocalPositions, refShip: refShip)
                 }
                 else {
-                    print("DEBUG: failed to run. d1 \(d1) d2 \(d2)")
-                    return
+                    print("\(#function) failed to run. d1 and d2 are equal")
                 }
+                parentScene.currentFormation = resultantFormation
+                return
             }
         }
         else {
@@ -60,7 +63,7 @@ class FormationTrueBearingCommandHandler: FormationCommandHandler {
                 let shipsToMove = shipsAhead + shipsAstern
                 // ships ahead will form on bearing indicated. ships astern will form on reciprocal bearing
                 let newPos = CommandUtils.generatePositionsForTrueAndReciprocal(warships: shipsToMove, trueBrg: trueBrg, refShip: refShip)
-                CommandUtils.move(warships: shipsToMove, to: newPos, refShip: refShip)
+                resultantFormation = CommandUtils.move(warships: shipsToMove, to: newPos, refShip: refShip)
             }
             
             // if there are only ships ahead
@@ -77,7 +80,7 @@ class FormationTrueBearingCommandHandler: FormationCommandHandler {
                     }
                     else {
                         let newPos = CommandUtils.generatePositionsForTrueOnly(warships: shipsAhead, trueBrg: trueBrg, refShip: refShip)
-                        CommandUtils.move(warships: shipsAhead, to: newPos, refShip: refShip)
+                        resultantFormation = CommandUtils.move(warships: shipsAhead, to: newPos, refShip: refShip)
                     }
                 }
             }

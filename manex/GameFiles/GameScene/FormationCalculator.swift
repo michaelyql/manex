@@ -17,8 +17,6 @@ class FormationCalculator {
     // MARK: - INIT
     init() {
         generatePresetFormations()
-        
-        print("preset fmn 1 \(presetFormations[0])")
     }
     
     // MARK: - HANDLERS
@@ -118,14 +116,24 @@ class FormationCalculator {
         createFormation(points: [(0, 0), (0, -150), (0, -300), (0, -450), (300, 0), (300, -150), (300, -300), (300, -450)])
         // F6
         createFormation(points: [(0, 0), (0, -150), (0, -300), (0, -450), (-300, 0), (-300, -150), (-300, -300), (-300, -450)])
+        // F7
+        createFormation(points: [(0, 0), (0, -150), (300, 0), (300, -150), (600, 0), (600, -150), (900, 0), (900, -150)])
+        // F8
+        createFormation(points: [(0, 0), (0, -150), (-300, 0), (-300, -150), (-600, 0), (-600, -150), (-900, 0), (-900, -150)])
+        // F9
+
     }
 }
 
 // MARK: - 
-struct PolarPoint {
+struct PolarPoint: CustomStringConvertible {
     // distance from origin
     let r: CGFloat
     // angle from origin POINT, which is the first ship in formation (relative to Y axis)
     // NOTE! - angle in radians is already made positive
     let a: CGFloat
+    
+    var description: String {
+        return "r: \(r), a: \(a / .pi * 180)"
+    }
 }
