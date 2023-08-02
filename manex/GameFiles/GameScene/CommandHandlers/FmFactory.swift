@@ -5,13 +5,14 @@
 //  Created by michaelyangqianlong on 2/6/23.
 //
 
-// TODO: - implement FormTrueBrgWithDivHandler class and FormGolfTrueBrgHandler class
-
 import SpriteKit
 
 protocol FormationCommandHandler {
     func execute()
 }
+
+// Factory produce a specific type of CommandHandler which all have the execute() function
+// The returned CommandHandler implements its own logic of how to move the ships.
 
 class FormationCommandFactory {
     
@@ -34,7 +35,8 @@ class FormationCommandFactory {
                     return FormationTrueBearingCommandHandler(trueBrg: trueBrg, refShip: refShip, warships: warships)
                 }
                 else {
-                    throw FormationInputError.noBearingIndicated
+                    print(#file)
+                    throw FormationInputError.noBearingIndicated(#file, #function)
                 }
             }
             else {
@@ -49,15 +51,15 @@ class FormationCommandFactory {
         else {
             if inputs.divSeparation != UNSELECTED {
                 if let trueBrg = inputs.trueBrg {
-                    return FormationGolfTrueBearingHandler()
+                    return FormationGolfTrueBearingHandler(trueBrg: trueBrg, refShip: refShip, warships: warships)
                 }
                 else if let relBrg = inputs.relBrg {
                     // just convert rel to true brg and reuse the true brg golf div handler
                     let trueBrg = try convertRelToTrueBrg(relDir: inputs.relDir, relBrg: relBrg, refShip: refShip)
-                    return FormationGolfTrueBearingHandler()
+                    return FormationGolfTrueBearingHandler(trueBrg: trueBrg, refShip: refShip, warships: warships)
                 }
                 else {
-                    throw FormationInputError.noBearingIndicated
+                    throw FormationInputError.noBearingIndicated(#file, #function)
                 }
             }
             else {
@@ -88,7 +90,7 @@ class FormationCommandFactory {
 }
 
 enum FormationInputError: Error {
-    case noBearingIndicated
+    case noBearingIndicated(String, String)
     case noTrueBearingIndicated
     case noDivSeparationIndicated
     case noRelativeDirectionIndicated

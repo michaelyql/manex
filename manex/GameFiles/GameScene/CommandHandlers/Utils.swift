@@ -8,7 +8,7 @@
 import SpriteKit
 import UIKit
 
-class CommandHelpers {
+class CommandUtils {
     
     static func getCurrentShipsPosition(warships: [Warship]) -> [CGPoint] {
         var pts: [CGPoint] = []

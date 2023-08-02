@@ -19,7 +19,7 @@ final class CommandHelpersTests: XCTestCase {
     }
     
     func test_IsAngleBetweenRange_Angle010Between350And050_shouldReturnTrue() {
-        let is10Between350And050 = CommandHelpers.isAngleBetweenRange(angleToCheck: 10, referenceAngle: 200)
+        let is10Between350And050 = CommandUtils.isAngleBetweenRange(angleToCheck: 10, referenceAngle: 200)
         XCTAssertTrue(is10Between350And050, "The method did not correctly return 10 is between 350 and 050")
     }
 
