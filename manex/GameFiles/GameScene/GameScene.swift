@@ -44,7 +44,6 @@ class GameScene: SKScene {
     let formationLabel: SKLabelNode = SKLabelNode(text: "Formation: 1")
     let numberOfShipsLabel: SKLabelNode = SKLabelNode(text: "No. of Ships: 1")
     let TURN_DURATION: CGFloat = 1.0
-    static let formationCalculator = FormationCalculator()
     
     // MARK: - ENTRY POINT
     override func didMove(to view: SKView) {

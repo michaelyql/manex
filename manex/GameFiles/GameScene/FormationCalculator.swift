@@ -10,17 +10,15 @@ import Foundation
 class FormationCalculator {
     // MARK: - PROPERTIES
     // roughly translates to 1.14 degrees tolerance
-    let toleranceAngle: CGFloat = 0.02
-    let toleranceDistance: CGFloat = 10.0
-    var presetFormations: [[PolarPoint]] = []
+    static let toleranceAngle: CGFloat = 0.02
+    static let toleranceDistance: CGFloat = 10.0
+    static var presetFormations: [[PolarPoint]] = []
     
     // MARK: - INIT
-    init() {
-        generatePresetFormations()
-    }
+    init() {}
     
     // MARK: - HANDLERS
-    func calculateCurrentFormation(for currentFmn: [PolarPoint]) -> FormationType? {
+    static func calculateCurrentFormation(for currentFmn: [PolarPoint]) -> FormationType? {
         var result: FormationType? = nil
         var matchAlreadyFound = false
         // compare current formation against all existing preset formations
@@ -41,7 +39,7 @@ class FormationCalculator {
     }
 
     // compare current formation against list of preset formations
-    func compare(presetFmn: [PolarPoint], currentFmn: [PolarPoint]) -> Bool
+    static func compare(presetFmn: [PolarPoint], currentFmn: [PolarPoint]) -> Bool
     {
         // account for tolerance radius
         for i in 0..<currentFmn.count {
@@ -56,7 +54,7 @@ class FormationCalculator {
         return true
     }
     
-    func checkForLineOfBearing(points: [PolarPoint]) -> FormationType? {
+    static func checkForLineOfBearing(points: [PolarPoint]) -> FormationType? {
         guard points.count > 1 else { return nil }
         print("-------Checking for LoB------")
         var isOnSameBearing = true
@@ -76,7 +74,7 @@ class FormationCalculator {
     }
     
     // expects (x, y) for each point
-    func createFormation(points: [(x: CGFloat, y: CGFloat)]) {
+    static func createFormation(points: [(x: CGFloat, y: CGFloat)]) -> [PolarPoint] {
         var p: [PolarPoint] = []
         // the point of reference (origin) will be the first ship in formation
         let x = points[0].x
@@ -98,30 +96,34 @@ class FormationCalculator {
             }
             p.append(PolarPoint(r: r, a: a))
         }
-        // Add formation to presets
-        presetFormations.append(p)
+        return p
     }
     
     // TODO: - add f7 to f12
-    func generatePresetFormations() {
-        // F1
-        createFormation(points: [(0, 0), (0, -150), (0, -300), (0, -450), (0, -600), (0, -750), (0, -900), (0, -1050)])
-        // F2
-        createFormation(points: [(0, 0), (0, 150), (0, 300), (0, 450), (0, 600), (0, 750), (0, 900), (0, 1050)])
-        // F3
-        createFormation(points: [(0, 0), (150, 0), (300, 0), (450, 0), (600, 0), (750, 0), (900, 0), (1050, 0)])
-        // F4
-        createFormation(points: [(0, 0), (-150, 0), (-300, 0), (-450, 0), (-600, 0), (-750, 0), (-900, 0), (-1050, 0)])
-        // F5
-        createFormation(points: [(0, 0), (0, -150), (0, -300), (0, -450), (300, 0), (300, -150), (300, -300), (300, -450)])
-        // F6
-        createFormation(points: [(0, 0), (0, -150), (0, -300), (0, -450), (-300, 0), (-300, -150), (-300, -300), (-300, -450)])
-        // F7
-        createFormation(points: [(0, 0), (0, -150), (300, 0), (300, -150), (600, 0), (600, -150), (900, 0), (900, -150)])
-        // F8
-        createFormation(points: [(0, 0), (0, -150), (-300, 0), (-300, -150), (-600, 0), (-600, -150), (-900, 0), (-900, -150)])
-        // F9
-
+    static func generatePresetFormations() -> [[PolarPoint]] {
+        var f: [[PolarPoint]] = []
+        
+        let f1 = createFormation(points: [(0, 0), (0, -150), (0, -300), (0, -450), (0, -600), (0, -750), (0, -900), (0, -1050)])
+        
+        let f2 = createFormation(points: [(0, 0), (0, 150), (0, 300), (0, 450), (0, 600), (0, 750), (0, 900), (0, 1050)])
+        
+        let f3 = createFormation(points: [(0, 0), (150, 0), (300, 0), (450, 0), (600, 0), (750, 0), (900, 0), (1050, 0)])
+        
+        let f4 = createFormation(points: [(0, 0), (-150, 0), (-300, 0), (-450, 0), (-600, 0), (-750, 0), (-900, 0), (-1050, 0)])
+        
+        let f5 = createFormation(points: [(0, 0), (0, -150), (0, -300), (0, -450), (300, 0), (300, -150), (300, -300), (300, -450)])
+        
+        let f6 = createFormation(points: [(0, 0), (0, -150), (0, -300), (0, -450), (-300, 0), (-300, -150), (-300, -300), (-300, -450)])
+        
+        let f7 = createFormation(points: [(0, 0), (0, -150), (300, 0), (300, -150), (600, 0), (600, -150), (900, 0), (900, -150)])
+        
+        let f8 = createFormation(points: [(0, 0), (0, -150), (-300, 0), (-300, -150), (-600, 0), (-600, -150), (-900, 0), (-900, -150)])
+        
+        for formation in [f1, f2, f3, f4, f5, f6, f7, f8] {
+            f.append(formation)
+        }
+        
+        return f
     }
 }
 

@@ -30,6 +30,7 @@
 		11C595802A37084C00331ECE /* CorpenFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C5957F2A37084C00331ECE /* CorpenFactory.swift */; };
 		11C595822A370AFC00331ECE /* CorpenTrue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C595812A370AFC00331ECE /* CorpenTrue.swift */; };
 		11C595842A370FC900331ECE /* CorpenDelta.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C595832A370FC900331ECE /* CorpenDelta.swift */; };
+		11CEE2C02A7A620700320D20 /* [Warship]+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11CEE2BF2A7A620700320D20 /* [Warship]+Extension.swift */; };
 		11D76E602A22E8E800E75455 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D76E5F2A22E8E800E75455 /* AppDelegate.swift */; };
 		11D76E6B2A22E8E800E75455 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11D76E692A22E8E800E75455 /* Main.storyboard */; };
 		11D76E6D2A22E8EC00E75455 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 11D76E6C2A22E8EC00E75455 /* Assets.xcassets */; };
@@ -52,7 +53,6 @@
 		11D76EAB2A22F62600E75455 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D76EAA2A22F62600E75455 /* UIView+Extensions.swift */; };
 		11D76EAD2A22F62D00E75455 /* Setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D76EAC2A22F62D00E75455 /* Setup.swift */; };
 		11D76EAF2A22F63B00E75455 /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D76EAE2A22F63B00E75455 /* Camera.swift */; };
-		11D76EB12A22F64A00E75455 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D76EB02A22F64900E75455 /* Utilities.swift */; };
 		11D76EBB2A2303B600E75455 /* ToggleToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D76EBA2A2303B600E75455 /* ToggleToolbar.swift */; };
 		11D76EBD2A2305E100E75455 /* FormationScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D76EBC2A2305E100E75455 /* FormationScrollView.swift */; };
 		11D76EBF2A231BD500E75455 /* CommandMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D76EBE2A231BD500E75455 /* CommandMenu.swift */; };
@@ -95,6 +95,7 @@
 		11C595812A370AFC00331ECE /* CorpenTrue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CorpenTrue.swift; sourceTree = "<group>"; };
 		11C595832A370FC900331ECE /* CorpenDelta.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CorpenDelta.swift; sourceTree = "<group>"; };
 		11C595852A37141100331ECE /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		11CEE2BF2A7A620700320D20 /* [Warship]+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "[Warship]+Extension.swift"; sourceTree = "<group>"; };
 		11D76E5C2A22E8E800E75455 /* manex.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = manex.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		11D76E5F2A22E8E800E75455 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		11D76E6A2A22E8E800E75455 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -118,7 +119,6 @@
 		11D76EAA2A22F62600E75455 /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		11D76EAC2A22F62D00E75455 /* Setup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Setup.swift; sourceTree = "<group>"; };
 		11D76EAE2A22F63B00E75455 /* Camera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
-		11D76EB02A22F64900E75455 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		11D76EBA2A2303B600E75455 /* ToggleToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleToolbar.swift; sourceTree = "<group>"; };
 		11D76EBC2A2305E100E75455 /* FormationScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormationScrollView.swift; sourceTree = "<group>"; };
 		11D76EBE2A231BD500E75455 /* CommandMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandMenu.swift; sourceTree = "<group>"; };
@@ -270,6 +270,7 @@
 			isa = PBXGroup;
 			children = (
 				11D76EA82A22F62000E75455 /* Warship.swift */,
+				11CEE2BF2A7A620700320D20 /* [Warship]+Extension.swift */,
 			);
 			path = Nodes;
 			sourceTree = "<group>";
@@ -283,7 +284,6 @@
 				11D76EAC2A22F62D00E75455 /* Setup.swift */,
 				11D76E942A22F58300E75455 /* Core.swift */,
 				11D76EAE2A22F63B00E75455 /* Camera.swift */,
-				11D76EB02A22F64900E75455 /* Utilities.swift */,
 				11D76EA42A22F60F00E75455 /* FormationCalculator.swift */,
 			);
 			path = GameScene;
@@ -443,7 +443,7 @@
 				11C595842A370FC900331ECE /* CorpenDelta.swift in Sources */,
 				11D76EC12A238F7600E75455 /* CommandMenuCorpenView.swift in Sources */,
 				11965BBD2A2A2DC700ABE0F9 /* FmFactory.swift in Sources */,
-				11D76EB12A22F64A00E75455 /* Utilities.swift in Sources */,
+				11CEE2C02A7A620700320D20 /* [Warship]+Extension.swift in Sources */,
 				11D76E992A22F5AB00E75455 /* Helpers.swift in Sources */,
 				11965BC52A2A530F00ABE0F9 /* FmTrue.swift in Sources */,
 				11965BBB2A2A077E00ABE0F9 /* MoveShips.swift in Sources */,
