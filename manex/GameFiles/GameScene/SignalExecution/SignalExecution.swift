@@ -7,7 +7,8 @@
 
 import SpriteKit
 
-// TODO: - break down each individual function into smaller parts
+// These are the functions that get called when user presses the 'Execute' button
+// Logic is implemented by each individual Handler type; just call handler.execute()
 extension GameScene {
     
     func executeFormation(with formationInputs: FormationInputs, withReferenceTo refShip: Warship) {
