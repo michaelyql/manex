@@ -83,7 +83,7 @@ class CommandUtils {
     }
     
     static func move(warships: [Warship], to newPos: [CGPoint], refShip: Warship) -> FormationType? {
-        print("Calling \(#function) in /\((#file.split(separator: "/")).last!)")
+        
         guard newPos.count == warships.count else { return nil }
         
         let prevHeading = refShip.zRotation
@@ -107,7 +107,7 @@ class CommandUtils {
         return resultantFormation
     }
     
-    static func findShips(relBrg: CGFloat, warships: [Warship], refShip: Warship) -> [Warship] {
+    static func findShips(relBrg: CGFloat, warships: [Warship], refShip: Warship, tag: String) -> [Warship] {
         let refLine = SKSpriteNode(texture: SKTexture(imageNamed: "referenceLine"))
         refShip.addChild(refLine)
         refLine.anchorPoint = CGPoint(x: 0.5, y: 0)
@@ -123,23 +123,26 @@ class CommandUtils {
             }
         }
         refLine.removeFromParent()
+        if !intersections.isEmpty {
+            print("Found ships \(tag): \(intersections)")
+        }
         return intersections
     }
     
     static func findShipsAhead(warships: [Warship], refShip: Warship) -> [Warship] {
-        return findShips(relBrg: 0, warships: warships, refShip: refShip)
+        return findShips(relBrg: 0, warships: warships, refShip: refShip, tag: "Ahead")
     }
     
     static func findShipsAstern(warships: [Warship], refShip: Warship) -> [Warship] {
-        return findShips(relBrg: 180, warships: warships, refShip: refShip)
+        return findShips(relBrg: 180, warships: warships, refShip: refShip, tag: "Astern")
     }
     
     static func findShipsPortBeam(warships: [Warship], refShip: Warship) -> [Warship] {
-        return findShips(relBrg: -90, warships: warships, refShip: refShip)
+        return findShips(relBrg: -90, warships: warships, refShip: refShip, tag: "Port Beam")
     }
     
     static func findShipsStbdBeam(warships: [Warship], refShip: Warship) -> [Warship] {
-        return findShips(relBrg: 90, warships: warships, refShip: refShip)
+        return findShips(relBrg: 90, warships: warships, refShip: refShip, tag: "Stbd Beam")
     }
     
     static func haulOutToPort(warships: [Warship], shipToHaulOutLast: Warship) -> FormationType? {
@@ -166,7 +169,8 @@ class CommandUtils {
                 ship.run(waitAction, completion: {
                     ship.run(moveAction)
                     if ship == shipToHaulOutLast {
-                        
+                        // recalculate and update the formation
+                        resultantFormation = FormationCalculator.calculateCurrentFormation(for: warships.toPolarPoints())
                     }
                 })
             }
@@ -189,6 +193,10 @@ class CommandUtils {
                 let waitAction = SKAction.wait(forDuration: TimeInterval(CGFloat(Warship.numberOfShips)-i) * 2.4)
                 ship.run(waitAction, completion: {
                     ship.run(moveAction)
+                    if ship == shipToHaulOutLast {
+                        // recalculate and update the formation
+                        resultantFormation = FormationCalculator.calculateCurrentFormation(for: warships.toPolarPoints())
+                    }
                 })
             }
         }
@@ -199,14 +207,16 @@ class CommandUtils {
         return resultantFormation
     }
     
-    static func haulOut(to trueBrg: CGFloat, warships: [Warship], refShip: Warship) {
-        print("Calling \(#function) in \((#file.split(separator: "/").last!))")
+    static func haulOut(to trueBrg: CGFloat, warships: [Warship], refShip: Warship) -> FormationType? {
+        print("Hauling out to \(trueBrg)")
         let angleInRadians = trueBrg / 180 * .pi
         let offset = -refShip.zRotation
         var projectedX: CGFloat = .zero
         var projectedY: CGFloat = .zero
         var controlPointBrg: CGFloat = .zero
         let refShipIsRoot = refShip == warships[0]
+        
+        var resultantFormation: FormationType? = nil
         
         // check which side is trueBrg on, then calculate the projected position
         if (trueBrg + 360) < (refShip.getAsternBearing() + 210) {
@@ -244,12 +254,24 @@ class CommandUtils {
             ship.run(waitAction, completion: {
                 ship.run(moveAction, completion: {
                     ship.zRotation = -offset
+                    if refShipIsRoot && ship == warships[0] ||
+                        !refShipIsRoot && ship == warships.last {
+                        // recalculate and update the formation
+                        resultantFormation = FormationCalculator.calculateCurrentFormation(for: warships.toPolarPoints())
+                    }
                 })
             })
         }
+        return resultantFormation
     }
     
-    static func haulOutastern() {
+    static func haulOutastern(to trueBrg: CGFloat, warships: [Warship], refShip: Warship) -> FormationType? {
+        
+        var resultantFormation: FormationType? = nil
+        
+        
+        
+        return resultantFormation
         
     }
     

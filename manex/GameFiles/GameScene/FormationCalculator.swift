@@ -12,7 +12,7 @@ class FormationCalculator {
     // roughly translates to 1.14 degrees tolerance
     static let toleranceAngle: CGFloat = 0.02
     static let toleranceDistance: CGFloat = 10.0
-    static var presetFormations: [[PolarPoint]] = []
+    static let presetFormations: [[PolarPoint]] = generatePresetFormations()
     
     // MARK: - INIT
     init() {}
@@ -22,17 +22,19 @@ class FormationCalculator {
         var result: FormationType? = nil
         var matchAlreadyFound = false
         // compare current formation against all existing preset formations
+        print("Checking for preset formations")
         DispatchQueue.concurrentPerform(iterations: presetFormations.count) { (index) in
             let matched = compare(presetFmn: presetFormations[index], currentFmn: currentFmn)
             if matched && !matchAlreadyFound {
                 matchAlreadyFound = true
-                print("-----Match found! Formation \(index+1)-----")
                 result = FormationType(rawValue: "\(index+1)")
+                print("Match found: \(result)")
             }
         }
         // if current formation is not one of the preset formations
         if result == nil {
             // do further checks for a line of bearing
+            print("No match found.")
             result = checkForLineOfBearing(points: currentFmn)
         }
         return result
@@ -54,9 +56,12 @@ class FormationCalculator {
         return true
     }
     
+    // TODO: Since angle is always normalized w.r.t. 000, we need to convert the angle back to true bearing instead of relative.
+    // Otherwise, a LOB 150 when ships are all facing 140 would become a LOB 010 which is wrong.
+    // We can do this by adding back the ship's current heading.
     static func checkForLineOfBearing(points: [PolarPoint]) -> FormationType? {
         guard points.count > 1 else { return nil }
-        print("-------Checking for LoB------")
+        print("Checking for Line of Bearing.")
         var isOnSameBearing = true
         let expectedBrg = points[1].a // points[0] is (0, 0) so it doesnt work
         for i in 1..<points.count {
@@ -65,10 +70,10 @@ class FormationCalculator {
             }
         }
         if isOnSameBearing {
-            print("ships on line of bearing (\(points[1].a / .pi * 180)).")
+            print("Ships on line of bearing \(points[1].a / .pi * 180).")
         }
         else {
-            print("ships not on line of bearing.")
+            print("No line of bearing.")
         }
         return isOnSameBearing ? FormationType.lineOfBearing : nil
     }

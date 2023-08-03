@@ -23,6 +23,11 @@ class Warship: SKSpriteNode {
     private var sequenceLabel: SKLabelNode
     var warshipHeadingArrow: SKSpriteNode
     
+    // for debugging
+    override var description: String {
+        return self.name!
+    }
+    
     // MARK: - INIT
     init() {
         let texture = SKTexture(imageNamed: "battleship")
@@ -45,7 +50,7 @@ class Warship: SKSpriteNode {
     
         super.init(texture: texture, color: .clear, size: texture.size())
         
-        self.name = "ship_\(sequenceNum)"
+        self.name = "Ship \(sequenceNum)"
         self.setScale(1.0)
         self.anchorPoint = CGPoint(x: 0.5, y: 0.5)
         self.addChild(sequenceLabel)
