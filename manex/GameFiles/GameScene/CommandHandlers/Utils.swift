@@ -167,11 +167,12 @@ class CommandUtils {
                 let moveAction = SKAction.follow(pathToDest.cgPath, asOffset: false, orientToPath: true, speed: 120)
                 let waitAction = SKAction.wait(forDuration: TimeInterval(CGFloat(Warship.numberOfShips)-i) * 2.4)
                 ship.run(waitAction, completion: {
-                    ship.run(moveAction)
-                    if ship == shipToHaulOutLast {
-                        // recalculate and update the formation
-                        resultantFormation = FormationCalculator.calculateCurrentFormation(for: warships.toPolarPoints())
-                    }
+                    ship.run(moveAction, completion: {
+                        if ship == shipToHaulOutLast {
+                            // recalculate and update the formation
+                            resultantFormation = FormationCalculator.calculateCurrentFormation(for: warships.toPolarPoints())
+                        }
+                    })
                 })
             }
         }
@@ -192,11 +193,12 @@ class CommandUtils {
                 let moveAction = SKAction.follow(pathToDest.cgPath, asOffset: false, orientToPath: true, speed: 120)
                 let waitAction = SKAction.wait(forDuration: TimeInterval(CGFloat(Warship.numberOfShips)-i) * 2.4)
                 ship.run(waitAction, completion: {
-                    ship.run(moveAction)
-                    if ship == shipToHaulOutLast {
-                        // recalculate and update the formation
-                        resultantFormation = FormationCalculator.calculateCurrentFormation(for: warships.toPolarPoints())
-                    }
+                    ship.run(moveAction, completion: {
+                        if ship == shipToHaulOutLast {
+                            // recalculate and update the formation
+                            resultantFormation = FormationCalculator.calculateCurrentFormation(for: warships.toPolarPoints())
+                        }
+                    })
                 })
             }
         }
