@@ -16,19 +16,13 @@ class GameScene: SKScene {
     
     // MARK: - PROPERTIES
     var warshipsArray: [Warship] = []
-    var currentFormation: FormationType? = .one {
+    var currentFormation: FormationType = .one {
         didSet {
             updateShipsPosition()
             updateFormationLabel()
         }
     }
     var lineGuides: [Warship] = []
-    // this should give the true bearing of ships from the guide or their line guide
-    var formationBearing: CGFloat = 180 {
-        didSet {
-            print("Ships now bearing \(formationBearing) from their guide")
-        }
-    }
     var gameVC: GameViewController?
     var prevWheelAngle: CGFloat = 0.0
     var prevShipHeading: CGFloat = 0.0
@@ -76,12 +70,7 @@ class GameScene: SKScene {
     }
     
     func updateFormationLabel() {
-        if let fmn = currentFormation {
-            formationLabel.text = "Formation: \(fmn.rawValue)"
-        }
-        else {
-            formationLabel.text = "Formation: None"
-        }
+        formationLabel.text = "Formation: \(currentFormation)"
     }
     
     func toggleInfoView(isShowing: Bool) {
@@ -110,21 +99,3 @@ extension GameScene: WarshipDelegate {
         gameVC?.updateNumberOfShips(newVal: newVal, lastIndex: newVal)
     }
 }
-
-enum FormationType: String {
-    case one = "1"
-    case two = "2"
-    case three = "3"
-    case four = "4"
-    case five = "5"
-    case six = "6"
-    case seven = "7"
-    case eight = "8"
-    case nine = "9"
-    case ten = "10"
-    case eleven = "11"
-    case twelve = "12"
-    case lineOfBearing = "Line of Bearing"
-}
-
-

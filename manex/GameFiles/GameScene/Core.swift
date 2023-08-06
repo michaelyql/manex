@@ -12,7 +12,7 @@ extension GameScene {
     
     func addShip() {
         // if current formation is nil, don't let them add a new ship
-        if Warship.numberOfShips > 7 || currentFormation == nil {
+        if Warship.numberOfShips > 7 || currentFormation == .none {
             return
         }
         else {
@@ -36,6 +36,7 @@ extension GameScene {
         // update camera position so user doesn't have to pan to find where are the ships
         let newCameraPosition: CGPoint = getFormationCentroid()
         moveCamera(to: newCameraPosition)
+        updateShipsPosition()
     }
     
     func updateShipsPosition() {
@@ -64,9 +65,9 @@ extension GameScene {
             formation11()
         case .twelve:
             formation12()
-//        case .lineOfBearing:
-//            truelineOfBearing(self.formationBearing)
-        default:
+        case .lineOfBearing(let bearing):
+            truelineOfBearing(bearing)
+        case .none:
             break
         }
         let newCameraPosition: CGPoint = getFormationCentroid()
@@ -239,8 +240,33 @@ extension GameScene {
     }
     
     func updateFormation(number: Int) {
-        let type = String(number)
-        let newFormation = FormationType(rawValue: type)
-        self.currentFormation = newFormation
+        switch number {
+        case 1:
+            self.currentFormation = .one
+        case 2:
+            self.currentFormation = .two
+        case 3:
+            self.currentFormation = .three
+        case 4:
+            self.currentFormation = .four
+        case 5:
+            self.currentFormation = .five
+        case 6:
+            self.currentFormation = .six
+        case 7:
+            self.currentFormation = .seven
+        case 8:
+            self.currentFormation = .eight
+        case 9:
+            self.currentFormation = .nine
+        case 10:
+            self.currentFormation = .ten
+        case 11:
+            self.currentFormation = .eleven
+        case 12:
+            self.currentFormation = .twelve
+        default:
+            self.currentFormation = .none
+        }
     }
 }
