@@ -31,7 +31,7 @@ class FormationTrueBearingCommandHandler: FormationCommandHandler {
         if currentFormation != .one && currentFormation != .two && currentFormation != .three && currentFormation != .four {
             print("INFO: Current formation is not 1 to 4")
             
-            self.compareDistancesAndMove(trueBrg: trueBrg)
+            resultantFormation = self.compareDistancesAndMove(trueBrg: trueBrg)
         }
         else {
             print("INFO: Formation is either 1,2,3 or 4")
@@ -42,12 +42,7 @@ class FormationTrueBearingCommandHandler: FormationCommandHandler {
             
             // if there are both ships ahead and astern
             if !shipsAhead.isEmpty && !shipsAstern.isEmpty {
-                
-                // TODO: Implement check
-                let shipsToMove = shipsAhead + shipsAstern
-                // ships ahead will form on bearing indicated. ships astern will form on reciprocal bearing
-                let newPos = CommandUtils.generatePositionsForTrueAndReciprocal(warships: shipsToMove, trueBrg: trueBrg, refShip: refShip)
-                resultantFormation = CommandUtils.move(warships: shipsToMove, to: newPos, refShip: refShip)
+                resultantFormation = self.compareDistancesAndMove(trueBrg: trueBrg)
             }
             
             // if there are only ships ahead
@@ -111,7 +106,9 @@ class FormationTrueBearingCommandHandler: FormationCommandHandler {
         return
     }
     
-    private func compareDistancesAndMove(trueBrg: CGFloat) {
+    private func compareDistancesAndMove(trueBrg: CGFloat) -> FormationType {
+        
+        var resultantFormation: FormationType = .none
         
         let currentPts: [CGPoint] = warships.getCurrPositions()
         
@@ -127,14 +124,16 @@ class FormationTrueBearingCommandHandler: FormationCommandHandler {
         // if both distances are valid
         if d1 != -1 && d2 != -1 {
             if d1 < d2 {
-                CommandUtils.move(warships: warships, to: trueBrgPositions, refShip: refShip)
+                resultantFormation = CommandUtils.move(warships: warships, to: trueBrgPositions, refShip: refShip)
             }
             else if d1 > d2 {
-                CommandUtils.move(warships: warships, to: reciprocalPositions, refShip: refShip)
+                resultantFormation = CommandUtils.move(warships: warships, to: reciprocalPositions, refShip: refShip)
             }
             else {
                 print("\(#function) failed to run. d1 and d2 are equal")
             }
         }
+        
+        return resultantFormation
     }
 }
