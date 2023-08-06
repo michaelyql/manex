@@ -82,12 +82,12 @@ class CommandUtils {
         return totalDist
     }
     
-    static func move(warships: [Warship], to newPos: [CGPoint], refShip: Warship) -> FormationType? {
+    static func move(warships: [Warship], to newPos: [CGPoint], refShip: Warship) -> FormationType {
         
-        guard newPos.count == warships.count else { return nil }
+        guard newPos.count == warships.count else { return .none }
         
         let prevHeading = refShip.zRotation
-        var resultantFormation: FormationType? = nil
+        var resultantFormation: FormationType = .none
         
         for i in 0..<newPos.count {
             let currShip = warships[i]
@@ -145,11 +145,11 @@ class CommandUtils {
         return findShips(relBrg: 90, warships: warships, refShip: refShip, tag: "Stbd Beam")
     }
     
-    static func haulOutToPort(warships: [Warship], shipToHaulOutLast: Warship) -> FormationType? {
+    static func haulOutToPort(warships: [Warship], shipToHaulOutLast: Warship) -> FormationType {
         print("Calling \(#function) function in \((#file.split(separator: "/").last!))")
         let offset = -shipToHaulOutLast.zRotation
         
-        var resultantFormation: FormationType? = nil
+        var resultantFormation: FormationType = .none
         
         if warships[0] == shipToHaulOutLast {
             var i = CGFloat.zero
@@ -207,7 +207,7 @@ class CommandUtils {
         return resultantFormation
     }
     
-    static func haulOut(to trueBrg: CGFloat, warships: [Warship], refShip: Warship) -> FormationType? {
+    static func haulOut(to trueBrg: CGFloat, warships: [Warship], refShip: Warship) -> FormationType {
         print("Hauling out to \(trueBrg)")
         let angleInRadians = trueBrg / 180 * .pi
         let offset = -refShip.zRotation
@@ -216,7 +216,7 @@ class CommandUtils {
         var controlPointBrg: CGFloat = .zero
         let refShipIsRoot = refShip == warships[0]
         
-        var resultantFormation: FormationType? = nil
+        var resultantFormation: FormationType = .none
         
         // check which side is trueBrg on, then calculate the projected position
         if (trueBrg + 360) < (refShip.getAsternBearing() + 210) {
@@ -265,9 +265,17 @@ class CommandUtils {
         return resultantFormation
     }
     
-    static func haulOutastern(to trueBrg: CGFloat, warships: [Warship], refShip: Warship) -> FormationType? {
+    // The assumption is that the ref ship is at either end of the formation
+    static func haulOutAstern(to trueBrg: CGFloat, warships: [Warship], refShip: Warship) -> FormationType {
         
-        var resultantFormation: FormationType? = nil
+        var resultantFormation: FormationType = .none
+        
+        // Control point is 150 units behind reference ship
+        let controlPointX: CGFloat = refShip.position.x - 150 * sin(-refShip.zRotation)
+        let controlPointY: CGFloat = refShip.position.y - 150 * cos(-refShip.zRotation)
+        
+        // Calculate the destination point
+        let distance = warships.count * 150
         
         
         

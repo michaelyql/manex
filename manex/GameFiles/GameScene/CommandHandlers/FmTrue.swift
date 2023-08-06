@@ -25,34 +25,13 @@ class FormationTrueBearingCommandHandler: FormationCommandHandler {
         let points = warships.toPolarPoints()
         let currentFormation = FormationCalculator.calculateCurrentFormation(for: points)
         print("Current formation: \(currentFormation)")
-        var resultantFormation: FormationType? = nil
+        var resultantFormation: FormationType = .none
         print("Beginning to move ships.")
             
         if currentFormation != .one && currentFormation != .two && currentFormation != .three && currentFormation != .four {
             print("INFO: Current formation is not 1 to 4")
-            let currentPts: [CGPoint] = warships.getCurrPositions()
             
-            // generate positions for true and reciprocal brg
-            let trueBrgPositions = CommandUtils.generatePositionsToCompare(for: trueBrg, warships: warships, refShip: refShip)
-            let reciprocalBrg = (trueBrg + CGFloat(180)).truncatingRemainder(dividingBy: CGFloat(360))
-            let reciprocalPositions = CommandUtils.generatePositionsToCompare(for: reciprocalBrg, warships: warships, refShip: refShip)
-            
-            // check to see which new set of positions requires travelling a shorter distance
-            let d1 = CommandUtils.calculateTotalDistanceTravelledBetween(origin: currentPts, destination: trueBrgPositions)
-            let d2 = CommandUtils.calculateTotalDistanceTravelledBetween(origin: currentPts, destination: reciprocalPositions)
-            
-            // if both distances are valid
-            if d1 != -1 && d2 != -1 {
-                if d1 < d2 {
-                    resultantFormation = CommandUtils.move(warships: warships, to: trueBrgPositions, refShip: refShip)
-                }
-                else if d1 > d2 {
-                    resultantFormation = CommandUtils.move(warships: warships, to: reciprocalPositions, refShip: refShip)
-                }
-                else {
-                    print("\(#function) failed to run. d1 and d2 are equal")
-                }
-            }
+            self.compareDistancesAndMove(trueBrg: trueBrg)
         }
         else {
             print("INFO: Formation is either 1,2,3 or 4")
@@ -63,6 +42,8 @@ class FormationTrueBearingCommandHandler: FormationCommandHandler {
             
             // if there are both ships ahead and astern
             if !shipsAhead.isEmpty && !shipsAstern.isEmpty {
+                
+                // TODO: Implement check
                 let shipsToMove = shipsAhead + shipsAstern
                 // ships ahead will form on bearing indicated. ships astern will form on reciprocal bearing
                 let newPos = CommandUtils.generatePositionsForTrueAndReciprocal(warships: shipsToMove, trueBrg: trueBrg, refShip: refShip)
@@ -107,14 +88,15 @@ class FormationTrueBearingCommandHandler: FormationCommandHandler {
                 }
             }
             
-            
+            // there are ships both port and stbd, i.e. ref ship is not at either end
             else if !shipsPortBeam.isEmpty && !shipsStbdBeam.isEmpty {
                 // implement haulOutAstern() - very similar to search turn
             }
             
             
             else if !shipsPortBeam.isEmpty {
-                
+                // Check if the target true bearing results in a reversal in formation
+                // I.e. Form 3 -> Form 4 and vice versa 
             }
             
             
@@ -127,5 +109,32 @@ class FormationTrueBearingCommandHandler: FormationCommandHandler {
         }
         parentScene.currentFormation = resultantFormation
         return
+    }
+    
+    private func compareDistancesAndMove(trueBrg: CGFloat) {
+        
+        let currentPts: [CGPoint] = warships.getCurrPositions()
+        
+        // generate positions for true and reciprocal brg
+        let trueBrgPositions = CommandUtils.generatePositionsToCompare(for: trueBrg, warships: warships, refShip: refShip)
+        let reciprocalBrg = (trueBrg + CGFloat(180)).truncatingRemainder(dividingBy: CGFloat(360))
+        let reciprocalPositions = CommandUtils.generatePositionsToCompare(for: reciprocalBrg, warships: warships, refShip: refShip)
+        
+        // check to see which new set of positions requires travelling a shorter distance
+        let d1 = CommandUtils.calculateTotalDistanceTravelledBetween(origin: currentPts, destination: trueBrgPositions)
+        let d2 = CommandUtils.calculateTotalDistanceTravelledBetween(origin: currentPts, destination: reciprocalPositions)
+        
+        // if both distances are valid
+        if d1 != -1 && d2 != -1 {
+            if d1 < d2 {
+                CommandUtils.move(warships: warships, to: trueBrgPositions, refShip: refShip)
+            }
+            else if d1 > d2 {
+                CommandUtils.move(warships: warships, to: reciprocalPositions, refShip: refShip)
+            }
+            else {
+                print("\(#function) failed to run. d1 and d2 are equal")
+            }
+        }
     }
 }
