@@ -74,8 +74,32 @@ class Warship: SKSpriteNode {
     func getTrueHeading() -> CGFloat {
         return round(-self.zRotation / .pi * 180)
     }
+    
+    func getQuadrant() -> Quadrant {
+        let currAngle = -self.zRotation
+        
+        if currAngle > 0 && currAngle < .pi / 2 {
+            return .topRight
+        }
+        else if currAngle > .pi / 2 && currAngle < .pi {
+            return .bottomRight
+        }
+        else if currAngle > .pi && currAngle < 3/2 * .pi {
+            return .bottomLeft
+        }
+        else if currAngle > 3/2 * .pi && currAngle < 2 * .pi {
+            return .topLeft
+        }
+        else {
+            return .none
+        }
+    }
 }
 
 protocol WarshipDelegate {
     func updateNumberOfShips(newVal: Int)
+}
+
+enum Quadrant {
+    case topRight, bottomRight, bottomLeft, topLeft, none
 }
