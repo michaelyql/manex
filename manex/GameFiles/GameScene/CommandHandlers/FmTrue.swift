@@ -25,13 +25,12 @@ class FormationTrueBearingCommandHandler: FormationCommandHandler {
         let points = warships.toPolarPoints()
         let currentFormation = FormationCalculator.calculateCurrentFormation(for: points)
         print("Current formation: \(currentFormation)")
-        var resultantFormation: FormationType = .none
         print("Beginning to move ships.")
             
         if currentFormation != .one && currentFormation != .two && currentFormation != .three && currentFormation != .four {
             print("INFO: Current formation is not 1 to 4")
             
-            resultantFormation = self.compareDistancesAndMove(trueBrg: trueBrg)
+            self.compareDistancesAndMove(trueBrg: trueBrg)
         }
         else {
             print("INFO: Formation is either 1,2,3 or 4")
@@ -42,24 +41,24 @@ class FormationTrueBearingCommandHandler: FormationCommandHandler {
             
             // if there are both ships ahead and astern
             if !shipsAhead.isEmpty && !shipsAstern.isEmpty {
-                resultantFormation = self.compareDistancesAndMove(trueBrg: trueBrg)
+                self.compareDistancesAndMove(trueBrg: trueBrg)
             }
             
             // if there are only ships ahead
             else if !shipsAhead.isEmpty {
                 if currentFormation == .one && trueBrg == refShip.getAsternBearing() {
-                    resultantFormation = CommandUtils.haulOutToPort(warships: warships, shipToHaulOutLast: warships[0])
+                    CommandUtils.haulOutToPort(warships: warships, shipToHaulOutLast: warships[0])
                 }
                 else if currentFormation == .two && trueBrg == refShip.getAsternBearing() {
-                    resultantFormation = CommandUtils.haulOutToPort(warships: warships, shipToHaulOutLast: warships[Warship.numberOfShips-1])
+                    CommandUtils.haulOutToPort(warships: warships, shipToHaulOutLast: warships[Warship.numberOfShips-1])
                 }
                 else {
                     if CommandUtils.isAngleBetweenRange(angleToCheck: trueBrg, referenceAngle: refShip.getTrueHeading()) {
-                        resultantFormation = CommandUtils.haulOut(to: trueBrg, warships: shipsAhead, refShip: refShip)
+                        CommandUtils.haulOut(to: trueBrg, warships: shipsAhead, refShip: refShip)
                     }
                     else {
                         let newPos = CommandUtils.generatePositionsForTrueOnly(warships: shipsAhead, trueBrg: trueBrg, refShip: refShip)
-                        resultantFormation = CommandUtils.move(warships: shipsAhead, to: newPos, refShip: refShip)
+                        CommandUtils.move(warships: shipsAhead, to: newPos, refShip: refShip)
                     }
                 }
             }
@@ -67,18 +66,18 @@ class FormationTrueBearingCommandHandler: FormationCommandHandler {
             // if there are only ships astern
             else if !shipsAstern.isEmpty {
                 if currentFormation == .one && trueBrg == refShip.getTrueHeading() {
-                    resultantFormation = CommandUtils.haulOutToPort(warships: warships, shipToHaulOutLast: warships[0])
+                    CommandUtils.haulOutToPort(warships: warships, shipToHaulOutLast: warships[0])
                 }
                 else if currentFormation == .two && trueBrg == refShip.getTrueHeading() {
-                    resultantFormation = CommandUtils.haulOutToPort(warships: warships, shipToHaulOutLast: warships[Warship.numberOfShips-1])
+                    CommandUtils.haulOutToPort(warships: warships, shipToHaulOutLast: warships[Warship.numberOfShips-1])
                 }
                 else {
                     if CommandUtils.isAngleBetweenRange(angleToCheck: trueBrg, referenceAngle: refShip.getAsternBearing()) {
-                        resultantFormation = CommandUtils.haulOut(to: trueBrg, warships: warships, refShip: refShip)
+                        CommandUtils.haulOut(to: trueBrg, warships: warships, refShip: refShip)
                     }
                     else {
                         let newPos = CommandUtils.generatePositionsForTrueOnly(warships: shipsAstern, trueBrg: trueBrg, refShip: refShip)
-                        resultantFormation = CommandUtils.move(warships: shipsAstern, to: newPos, refShip: refShip)
+                        CommandUtils.move(warships: shipsAstern, to: newPos, refShip: refShip)
                     }
                 }
             }
@@ -102,13 +101,10 @@ class FormationTrueBearingCommandHandler: FormationCommandHandler {
                 print("Error - no ships found")
             }
         }
-        parentScene.currentFormation = resultantFormation
         return
     }
     
-    private func compareDistancesAndMove(trueBrg: CGFloat) -> FormationType {
-        
-        var resultantFormation: FormationType = .none
+    private func compareDistancesAndMove(trueBrg: CGFloat) {
         
         let currentPts: [CGPoint] = warships.getCurrPositions()
         
@@ -124,16 +120,14 @@ class FormationTrueBearingCommandHandler: FormationCommandHandler {
         // if both distances are valid
         if d1 != -1 && d2 != -1 {
             if d1 < d2 {
-                resultantFormation = CommandUtils.move(warships: warships, to: trueBrgPositions, refShip: refShip)
+                CommandUtils.move(warships: warships, to: trueBrgPositions, refShip: refShip)
             }
             else if d1 > d2 {
-                resultantFormation = CommandUtils.move(warships: warships, to: reciprocalPositions, refShip: refShip)
+                CommandUtils.move(warships: warships, to: reciprocalPositions, refShip: refShip)
             }
             else {
                 print("\(#function) failed to run. d1 and d2 are equal")
             }
         }
-        
-        return resultantFormation
     }
 }
