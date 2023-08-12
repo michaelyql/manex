@@ -11,6 +11,15 @@ import Foundation
 
 class CommandUtils {
     
+    init() {}
+    
+    static weak var gameScene: GameScene?
+    
+    func setGameScene(_ gs:GameScene) {
+        CommandUtils.gameScene = gs
+    }
+    
+    // MARK: - Calculating new positions
     static func generatePositionsToCompare(for trueBrg: CGFloat, warships: [Warship], refShip: Warship) -> [CGPoint] {
         var newPts: [CGPoint] = []
         let angleInRadians = trueBrg / 180 * .pi
@@ -82,31 +91,7 @@ class CommandUtils {
         return totalDist
     }
     
-    static func move(warships: [Warship], to newPos: [CGPoint], refShip: Warship) -> FormationType {
-        
-        guard newPos.count == warships.count else { return .none }
-        
-        let prevHeading = refShip.zRotation
-        var resultantFormation: FormationType = .none
-        
-        for i in 0..<newPos.count {
-            let currShip = warships[i]
-            let path = UIBezierPath()
-            path.move(to: currShip.position)
-            path.addLine(to: newPos[i])
-            
-            let moveAction = SKAction.follow(path.cgPath, asOffset: false, orientToPath: true, speed: 100)
-            currShip.run(moveAction, completion: {
-                currShip.zRotation = prevHeading
-                if i == newPos.count-1 {
-                    // recalculate and update the formation
-                    resultantFormation = FormationCalculator.calculateCurrentFormation(for: warships.toPolarPoints())
-                }
-            })
-        }
-        return resultantFormation
-    }
-    
+    // MARK: - Searching for ships
     static func findShips(relBrg: CGFloat, warships: [Warship], refShip: Warship, tag: String) -> [Warship] {
         let refLine = SKSpriteNode(texture: SKTexture(imageNamed: "referenceLine"))
         refShip.addChild(refLine)
@@ -145,7 +130,33 @@ class CommandUtils {
         return findShips(relBrg: 90, warships: warships, refShip: refShip, tag: "Stbd Beam")
     }
     
-    static func haulOutToPort(warships: [Warship], shipToHaulOutLast: Warship) -> FormationType {
+    // MARK: - Movement animation
+    static func move(warships: [Warship], to newPos: [CGPoint], refShip: Warship) {
+        
+        guard newPos.count == warships.count else { return }
+        
+        let prevHeading = refShip.zRotation
+        var resultantFormation: FormationType = .none
+        
+        for i in 0..<newPos.count {
+            let currShip = warships[i]
+            let path = UIBezierPath()
+            path.move(to: currShip.position)
+            path.addLine(to: newPos[i])
+            
+            let moveAction = SKAction.follow(path.cgPath, asOffset: false, orientToPath: true, speed: 100)
+            currShip.run(moveAction, completion: {
+                currShip.zRotation = prevHeading
+                if i == newPos.count-1 {
+                    // recalculate and update the formation
+                    resultantFormation = FormationCalculator.calculateCurrentFormation(for: warships.toPolarPoints())
+                    gameScene?.currentFormation = resultantFormation
+                }
+            })
+        }
+    }
+    
+    static func haulOutToPort(warships: [Warship], shipToHaulOutLast: Warship) {
         print("Calling \(#function) function in \((#file.split(separator: "/").last!))")
         let offset = -shipToHaulOutLast.zRotation
         
@@ -171,6 +182,7 @@ class CommandUtils {
                         if ship == shipToHaulOutLast {
                             // recalculate and update the formation
                             resultantFormation = FormationCalculator.calculateCurrentFormation(for: warships.toPolarPoints())
+                            gameScene?.currentFormation = resultantFormation
                         }
                     })
                 })
@@ -197,6 +209,7 @@ class CommandUtils {
                         if ship == shipToHaulOutLast {
                             // recalculate and update the formation
                             resultantFormation = FormationCalculator.calculateCurrentFormation(for: warships.toPolarPoints())
+                            gameScene?.currentFormation = resultantFormation
                         }
                     })
                 })
@@ -205,11 +218,9 @@ class CommandUtils {
         else {
             print("error in \(#function)")
         }
-        
-        return resultantFormation
     }
     
-    static func haulOut(to trueBrg: CGFloat, warships: [Warship], refShip: Warship) -> FormationType {
+    static func haulOut(to trueBrg: CGFloat, warships: [Warship], refShip: Warship) {
         print("Hauling out to \(trueBrg)")
         let angleInRadians = trueBrg / 180 * .pi
         let offset = -refShip.zRotation
@@ -260,11 +271,11 @@ class CommandUtils {
                         !refShipIsRoot && ship == warships.last {
                         // recalculate and update the formation
                         resultantFormation = FormationCalculator.calculateCurrentFormation(for: warships.toPolarPoints())
+                        gameScene?.currentFormation = resultantFormation
                     }
                 })
             })
         }
-        return resultantFormation
     }
     
     // The assumption is that the ref ship is at either end of the formation

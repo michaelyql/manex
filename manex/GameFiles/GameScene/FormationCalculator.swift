@@ -106,6 +106,11 @@ class FormationCalculator {
     }
     
     // TODO: - add f7 to f12
+    // Currently this is not working as intended because each of the 12 comparisons
+    // are happening concurrently. F1 and F6 have the same first 4 ship coordinates
+    // so it becomes a race to see which thread finishes comparing first.
+    // In this case the functions defined specifically for F1 will not be executed,
+    // and the formation will be treated as F6 instead, which is not intended. 
     static func generatePresetFormations() -> [[PolarPoint]] {
         var f: [[PolarPoint]] = []
         

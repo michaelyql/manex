@@ -20,6 +20,7 @@ class GameScene: SKScene {
         didSet {
             updateShipsPosition()
             updateFormationLabel()
+            print("[GameScene.swift] Formation Updated.")
         }
     }
     var lineGuides: [Warship] = []
@@ -38,9 +39,12 @@ class GameScene: SKScene {
     let formationLabel: SKLabelNode = SKLabelNode(text: "Formation: 1")
     let numberOfShipsLabel: SKLabelNode = SKLabelNode(text: "No. of Ships: 1")
     let TURN_DURATION: CGFloat = 1.0
+    let utils: CommandUtils = CommandUtils()
     
     // MARK: - ENTRY POINT
     override func didMove(to view: SKView) {
+        
+        utils.setGameScene(self)
         
         let ship = Warship()
         warshipsArray.append(ship)
