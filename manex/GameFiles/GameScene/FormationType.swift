@@ -7,7 +7,29 @@
 
 import Foundation
 
-enum FormationType: Equatable {
+enum FormationType: Equatable, CustomStringConvertible {
+    
+    var description: String {
+        get {
+            switch self {
+            case .one:     return "1"
+            case .two:     return "2"
+            case .three:   return "3"
+            case .four:    return "4"
+            case .five:    return "5"
+            case .six:     return "6"
+            case .seven:   return "7"
+            case .eight:   return "8"
+            case .nine:    return "9"
+            case .ten:     return "10"
+            case .eleven:  return "11"
+            case .twelve:  return "12"
+            case .lineOfBearing(let brg): return "Line of Brg \(brg)"
+            case .none:    return "None"
+            }
+        }
+    }
+    
     case one
     case two
     case three
