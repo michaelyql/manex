@@ -20,6 +20,8 @@ class CommandUtils {
     }
     
     // MARK: - Calculating new positions
+    // The positions generated follow exactly according to the ship's ordering
+    // So pos[0] corresponds to warships[0]'s new position
     static func generatePositionsToCompare(for trueBrg: CGFloat, warships: [Warship], refShip: Warship) -> [CGPoint] {
         var newPts: [CGPoint] = []
         let angleInRadians = trueBrg / 180 * .pi
@@ -137,6 +139,7 @@ class CommandUtils {
         
         let prevHeading = refShip.zRotation
         var resultantFormation: FormationType = .none
+        let lastShipToFinishAnimating = getFurthestShipToMove(warships: warships, newPos: newPos)
         
         for i in 0..<newPos.count {
             let currShip = warships[i]
@@ -147,7 +150,12 @@ class CommandUtils {
             let moveAction = SKAction.follow(path.cgPath, asOffset: false, orientToPath: true, speed: 100)
             currShip.run(moveAction, completion: {
                 currShip.zRotation = prevHeading
-                if i == newPos.count-1 {
+                // TODO: Fix the timing at which the completion handler is called
+                // The 'last' position in the newPos array is NOT necessarily the last
+                // SHIP to finish moving.
+                // Make sure that the resultant formation is only calculated when the
+                // LAST SHIP has finished its animations.  
+                if currShip == lastShipToFinishAnimating {
                     // recalculate and update the formation
                     resultantFormation = FormationCalculator.calculateCurrentFormation(for: warships.toPolarPoints())
                     gameScene?.currentFormation = resultantFormation
@@ -296,10 +304,30 @@ class CommandUtils {
         
     }
     
+    // MARK: - Others
     static func isAngleBetweenRange(angleToCheck: CGFloat, referenceAngle: CGFloat) -> Bool {
         let withinLowerRange: Bool = (angleToCheck + 360) < (referenceAngle + 210)
         let withinUpperRange: Bool = (angleToCheck + 360) > (referenceAngle + 510)
         
         return withinLowerRange || withinUpperRange
+    }
+    
+    // returns the ship that has to travel the longest distance from its original position
+    // to its destination
+    static func getFurthestShipToMove(warships: [Warship], newPos: [CGPoint]) -> Warship {
+        let currPts = warships.getCurrPositions()
+        var idx = 0 // idx of furthest ship to move
+        var furthestDistance: CGFloat = 0
+        for i in 0..<warships.count {
+            let dX = abs(newPos[i].x - warships[i].position.x)
+            let dY = abs(newPos[i].y -  warships[i].position.y)
+            let distanceTravelled = sqrt(pow(dX, 2) + pow(dY, 2))
+            if distanceTravelled >= furthestDistance {
+                furthestDistance = distanceTravelled
+                idx = i
+            }
+        }
+        print("[CommandHandlers/Utils.swift] The ship that finishes animating the last is \(warships[idx])")
+        return warships[idx]
     }
 }

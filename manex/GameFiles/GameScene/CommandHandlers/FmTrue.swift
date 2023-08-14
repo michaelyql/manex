@@ -84,7 +84,7 @@ class FormationTrueBearingCommandHandler: FormationCommandHandler {
             
             // there are ships both port and stbd, i.e. ref ship is not at either end
             else if !shipsPortBeam.isEmpty && !shipsStbdBeam.isEmpty {
-                // implement haulOutAstern() - very similar to search turn
+                self.compareDistancesAndMove(trueBrg: trueBrg)
             }
             
             
@@ -127,6 +127,10 @@ class FormationTrueBearingCommandHandler: FormationCommandHandler {
             }
             else {
                 print("\(#function) failed to run. d1 and d2 are equal")
+                // In this case, it probably means that the formation is converting
+                // from Column to Line Abreast, and the ref ship is not at either end.
+                // Thus ships ahead (for column formation) and ships to port (line abreast)
+                // will form on the bearing indicated. The rest will form on the reciprocal
             }
         }
     }
