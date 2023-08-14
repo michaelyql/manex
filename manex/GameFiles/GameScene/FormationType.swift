@@ -24,7 +24,7 @@ enum FormationType: Equatable, CustomStringConvertible {
             case .ten:     return "10"
             case .eleven:  return "11"
             case .twelve:  return "12"
-            case .lineOfBearing(let brg): return "Line of Brg \(brg)"
+            case .lineOfBearing(let brg): return "Line of Brg " + String(format: "%.1f", brg)
             case .none:    return "None"
             }
         }
