@@ -180,24 +180,6 @@ extension GameScene {
                 
                 degreeWheelAngleLabel.text = "\(round(rotationInRad / .pi * 180))"
                 headingLabel.text = "Heading: \(round(rotationInRad / .pi * 180))"
-                
-                // Formation bearing should also depend on the formation type
-                var bearingOffset = CGFloat.zero
-                switch currentFormation {
-                case .one, .five, .six, .seven, .eight:
-                    bearingOffset = .pi
-                case .three, .nine, .eleven:
-                    bearingOffset = .pi / 2
-                case .four, .ten, .twelve:
-                    bearingOffset = .pi * 3 / 2
-                case .two:
-                    bearingOffset = CGFloat.zero
-                case .lineOfBearing:
-                    // TODO: Change this
-                    break
-                default:
-                    break
-                }
             }
             
             prevWheelAngle = rotationInRad
