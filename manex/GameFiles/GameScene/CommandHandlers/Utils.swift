@@ -150,11 +150,6 @@ class CommandUtils {
             let moveAction = SKAction.follow(path.cgPath, asOffset: false, orientToPath: true, speed: 100)
             currShip.run(moveAction, completion: {
                 currShip.zRotation = prevHeading
-                // TODO: Fix the timing at which the completion handler is called
-                // The 'last' position in the newPos array is NOT necessarily the last
-                // SHIP to finish moving.
-                // Make sure that the resultant formation is only calculated when the
-                // LAST SHIP has finished its animations.  
                 if currShip == lastShipToFinishAnimating {
                     // recalculate and update the formation
                     resultantFormation = FormationCalculator.calculateCurrentFormation(for: warships.toPolarPoints())
@@ -287,21 +282,42 @@ class CommandUtils {
     }
     
     // The assumption is that the ref ship is at either end of the formation
-    static func haulOutAstern(to trueBrg: CGFloat, warships: [Warship], refShip: Warship) -> FormationType {
+    static func haulOutAstern(to trueBrg: CGFloat, warships: [Warship], refShip: Warship) {
         
-        var resultantFormation: FormationType = .none
+        let originalHdg = refShip.zRotation
         
-        // Control point is 150 units behind reference ship
-        let controlPointX: CGFloat = refShip.position.x - 150 * sin(-refShip.zRotation)
-        let controlPointY: CGFloat = refShip.position.y - 150 * cos(-refShip.zRotation)
+//        gameScene?.camera?.constraints = [SKConstraint.distance(SKRange(constantValue: 0), to: warships[0])]
         
-        // Calculate the destination point
-        let distance = warships.count * 150
-        
-        
-        
-        return resultantFormation
-        
+        for i in 0..<warships.count {
+            let currShip = warships[i]
+            let multiplier: CGFloat = CGFloat((warships.count * 2 - 1) - (i * 2))
+            
+            // Control point is 150 units behind reference ship
+            let controlPointX: CGFloat = currShip.position.x - 200 * sin(-refShip.zRotation)
+            let controlPointY: CGFloat = currShip.position.y - 200 * cos(-refShip.zRotation)
+            let controlPoint: CGPoint = CGPoint(x: controlPointX, y: controlPointY)
+            
+            let destinationPtX: CGFloat = controlPointX + 150 * sin(trueBrg / 180 * .pi) * multiplier
+            let destinationPtY: CGFloat = controlPointY + 150 * cos(trueBrg / 180 * .pi) * multiplier
+            let destPt: CGPoint = CGPoint(x: destinationPtX, y: destinationPtY)
+            
+            let pathToDest = UIBezierPath()
+            pathToDest.move(to: currShip.position)
+            pathToDest.addQuadCurve(to: destPt, controlPoint: controlPoint)
+            let moveAction = SKAction.follow(pathToDest.cgPath, asOffset: false, orientToPath: true, duration: 6 - 0.5 * Double(i))
+            let waitAction = SKAction.wait(forDuration: TimeInterval(floatLiteral: Double(i) * 2.0))
+            
+            
+            currShip.run(waitAction, completion: {
+                currShip.run(moveAction, completion: {
+                    currShip.zRotation = originalHdg
+                    if currShip == refShip {
+                        gameScene?.currentFormation = FormationCalculator.calculateCurrentFormation(for: warships.toPolarPoints())
+//                        gameScene?.camera?.constraints = []
+                    }
+                })
+            })
+        }
     }
     
     // MARK: - Others
@@ -315,7 +331,6 @@ class CommandUtils {
     // returns the ship that has to travel the longest distance from its original position
     // to its destination
     static func getFurthestShipToMove(warships: [Warship], newPos: [CGPoint]) -> Warship {
-        let currPts = warships.getCurrPositions()
         var idx = 0 // idx of furthest ship to move
         var furthestDistance: CGFloat = 0
         for i in 0..<warships.count {

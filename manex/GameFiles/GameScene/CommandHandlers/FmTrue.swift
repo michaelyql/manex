@@ -41,7 +41,7 @@ class FormationTrueBearingCommandHandler: FormationCommandHandler {
             
             // if there are both ships ahead and astern
             if !shipsAhead.isEmpty && !shipsAstern.isEmpty {
-                self.compareDistancesAndMove(trueBrg: trueBrg)
+                self.compareDistancesAndMove(trueBrg: trueBrg, currentFormation: currentFormation)
             }
             
             // if there are only ships ahead
@@ -84,18 +84,40 @@ class FormationTrueBearingCommandHandler: FormationCommandHandler {
             
             // there are ships both port and stbd, i.e. ref ship is not at either end
             else if !shipsPortBeam.isEmpty && !shipsStbdBeam.isEmpty {
-                self.compareDistancesAndMove(trueBrg: trueBrg)
+                self.compareDistancesAndMove(trueBrg: trueBrg, currentFormation: currentFormation)
             }
             
             
             else if !shipsPortBeam.isEmpty {
                 // Check if the target true bearing results in a reversal in formation
-                // I.e. Form 3 -> Form 4 and vice versa 
+                // I.e. Form 3 -> Form 4 and vice versa
+                // If there are only ships to port beam and the target heading is 90 deg
+                // to stbd w.r.t ref ship heading
+                if trueBrg == (refShip.getTrueHeading(plus: 90)) {
+                    if currentFormation == .four {
+                        CommandUtils.haulOutAstern(to: trueBrg, warships: warships.reversed(), refShip: refShip)
+                    }
+                    else if currentFormation == .three {
+                        CommandUtils.haulOutAstern(to: trueBrg, warships: warships, refShip: refShip)
+                    }
+                }
+                else {
+                    self.compareDistancesAndMove(trueBrg: trueBrg)
+                }
             }
             
-            
             else if !shipsStbdBeam.isEmpty {
-                
+                if trueBrg == (refShip.getTrueHeading(plus: 270)) {
+                    if currentFormation == .four {
+                        CommandUtils.haulOutAstern(to: trueBrg, warships: warships, refShip: refShip)
+                    }
+                    else if currentFormation == .three {
+                        CommandUtils.haulOutAstern(to: trueBrg, warships: warships.reversed(), refShip: refShip)
+                    }
+                }
+                else {
+                    self.compareDistancesAndMove(trueBrg: trueBrg)
+                }
             }
             else {
                 print("Error - no ships found")
@@ -104,7 +126,7 @@ class FormationTrueBearingCommandHandler: FormationCommandHandler {
         return
     }
     
-    private func compareDistancesAndMove(trueBrg: CGFloat) {
+    private func compareDistancesAndMove(trueBrg: CGFloat, currentFormation: FormationType? = nil) {
         
         let currentPts: [CGPoint] = warships.getCurrPositions()
         
@@ -126,11 +148,21 @@ class FormationTrueBearingCommandHandler: FormationCommandHandler {
                 CommandUtils.move(warships: warships, to: reciprocalPositions, refShip: refShip)
             }
             else {
-                print("\(#function) failed to run. d1 and d2 are equal")
                 // In this case, it probably means that the formation is converting
                 // from Column to Line Abreast, and the ref ship is not at either end.
                 // Thus ships ahead (for column formation) and ships to port (line abreast)
                 // will form on the bearing indicated. The rest will form on the reciprocal
+                
+                if let fmn = currentFormation {
+                    switch fmn {
+                    case .one, .three:
+                        CommandUtils.move(warships: warships, to: trueBrgPositions, refShip: refShip)
+                    case .two, .four:
+                        CommandUtils.move(warships: warships, to: reciprocalPositions, refShip: refShip)
+                    default:
+                        break
+                    }
+                }
             }
         }
     }
