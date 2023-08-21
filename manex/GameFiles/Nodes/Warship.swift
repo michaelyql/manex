@@ -57,7 +57,7 @@ class Warship: SKSpriteNode {
         self.addChild(warshipHeadingArrow)
     }
     
-    required init?(coder aDecorder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
@@ -71,27 +71,13 @@ class Warship: SKSpriteNode {
         return brg
     }
     
-    func getTrueHeading() -> CGFloat {
-        return round(-self.zRotation / .pi * 180)
-    }
-    
-    func getQuadrant() -> Quadrant {
-        let currAngle = -self.zRotation
-        
-        if currAngle > 0 && currAngle < .pi / 2 {
-            return .topRight
-        }
-        else if currAngle > .pi / 2 && currAngle < .pi {
-            return .bottomRight
-        }
-        else if currAngle > .pi && currAngle < 3/2 * .pi {
-            return .bottomLeft
-        }
-        else if currAngle > 3/2 * .pi && currAngle < 2 * .pi {
-            return .topLeft
+    func getTrueHeading(plus valueToAdd: CGFloat? = nil) -> CGFloat {
+        if let valueToAdd = valueToAdd {
+            let absoluteHeading = round(-self.zRotation / .pi * 180) + valueToAdd
+            return absoluteHeading.truncatingRemainder(dividingBy: 360)
         }
         else {
-            return .none
+            return round(-self.zRotation / .pi * 180)
         }
     }
 }
@@ -100,6 +86,4 @@ protocol WarshipDelegate {
     func updateNumberOfShips(newVal: Int)
 }
 
-enum Quadrant {
-    case topRight, bottomRight, bottomLeft, topLeft, none
-}
+
